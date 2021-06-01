@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package crawl_service;
 
-option go_package = "./";
+option go_package = "./pb";
 
 message UserContestRecord {
     string profile_url = 1;
