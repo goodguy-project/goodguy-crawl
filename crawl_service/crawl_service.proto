@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package crawl_service;
 
+option go_package = "./";
+
 message UserContestRecord {
     string profile_url = 1;
     int32 rating = 2;
