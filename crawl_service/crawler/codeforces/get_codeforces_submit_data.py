@@ -1,14 +1,14 @@
 import logging
 import json
 import requests
-from crawl_service.crawler.codeforces.concurrency_control import CONCURRENCY_CONTROL
+from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
 def get_codeforces_status(handle: str) -> dict:
     try:
-        task = CONCURRENCY_CONTROL.submit(requests.get,
+        task = RequestExecutorManage.work('codeforces', requests.get,
                                           f"https://codeforces.com/api/user.status?handle={handle}")
-        response = json.loads(task.result().text)
+        response = json.loads(task.text)
         return response
     except Exception as e:
         logging.exception(e)

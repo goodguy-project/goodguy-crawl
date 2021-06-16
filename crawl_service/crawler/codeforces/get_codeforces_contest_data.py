@@ -1,7 +1,7 @@
 import logging
 import json
 import requests
-from crawl_service.crawler.codeforces.concurrency_control import CONCURRENCY_CONTROL
+from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
 def get_codeforces_contest_data(handle: str) -> dict:
@@ -15,9 +15,9 @@ def get_codeforces_contest_data(handle: str) -> dict:
         'length': 0,
     }
     try:
-        task = CONCURRENCY_CONTROL.submit(requests.get,
+        task = RequestExecutorManage.work('codeforces', requests.get,
                                           f"https://codeforces.com/api/user.rating?handle={handle}")
-        source = json.loads(task.result().text)
+        source = json.loads(task.text)
         record = res['record']
         for contest in source["result"]:
             record.append({
