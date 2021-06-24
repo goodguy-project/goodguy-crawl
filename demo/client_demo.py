@@ -15,8 +15,8 @@ def start_new_thread(func, *args, **kwargs):
 
 def f(platform: str, handle: str):
     with grpc.insecure_channel('localhost:50051') as channel:
-        STUB = crawl_service_pb2_grpc.CrawlServiceStub(channel)
-        return STUB.GetUserContestRecord(crawl_service_pb2.GetUserSubmitRecordRequest(
+        stub = crawl_service_pb2_grpc.CrawlServiceStub(channel)
+        return stub.GetUserContestRecord(crawl_service_pb2.GetUserSubmitRecordRequest(
             platform=platform,
             handle=handle,
         ))
@@ -24,10 +24,18 @@ def f(platform: str, handle: str):
 
 def g(platform: str, handle: str):
     with grpc.insecure_channel('localhost:50051') as channel:
-        STUB = crawl_service_pb2_grpc.CrawlServiceStub(channel)
-        return STUB.GetUserSubmitRecord(crawl_service_pb2.GetUserSubmitRecordRequest(
+        stub = crawl_service_pb2_grpc.CrawlServiceStub(channel)
+        return stub.GetUserSubmitRecord(crawl_service_pb2.GetUserSubmitRecordRequest(
             platform=platform,
             handle=handle,
+        ))
+
+
+def h(platform: str):
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = crawl_service_pb2_grpc.CrawlServiceStub(channel)
+        return stub.GetRecentContest(crawl_service_pb2.GetRecentContestRequest(
+            platform=platform,
         ))
 
 
@@ -36,3 +44,7 @@ if __name__ == '__main__':
     start_new_thread(g, 'vjudge', 'ConanYu')
     start_new_thread(f, 'atcoder', 'ConanYu')
     start_new_thread(g, 'codeforces', 'ConanYu')
+    start_new_thread(h, 'nowcoder')
+    start_new_thread(h, 'leetcode')
+    start_new_thread(h, 'atcoder')
+    start_new_thread(h, 'codeforces')
