@@ -33,9 +33,9 @@ class Config(object):
             return deepcopy(ret)
 
 
-CONFIG = Config(
+GLOBAL_CONFIG = Config(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'config.yml'))
 
 
 if __name__ == '__main__':
-    print(CONFIG.get("apple"))
+    print(GLOBAL_CONFIG.get("apple"))

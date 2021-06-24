@@ -11,7 +11,7 @@ message UserContestRecord {
     message Record {
         string name = 1;
         string url = 2;
-        int32 timestamp = 3; // 单位：秒
+        int64 timestamp = 3; // 单位：秒
         int32 rating = 4;
     }
     repeated Record record = 4;
@@ -35,7 +35,22 @@ message GetUserSubmitRecordRequest {
     string handle = 2;
 }
 
+message GetRecentContestRequest {
+    string platform = 1;
+}
+
+message RecentContest {
+    message ContestMessage {
+        string name = 1;
+        string url = 2;
+        int64 timestamp = 3; // 单位：秒
+        map<string, string> ext_info = 4; // 额外信息
+    }
+    repeated ContestMessage recent_contest = 1;
+}
+
 service CrawlService {
     rpc GetUserContestRecord (GetUserContestRecordRequest) returns (UserContestRecord);
     rpc GetUserSubmitRecord (GetUserSubmitRecordRequest) returns (UserSubmitRecord);
+    rpc GetRecentContest (GetRecentContestRequest) returns (RecentContest);
 }

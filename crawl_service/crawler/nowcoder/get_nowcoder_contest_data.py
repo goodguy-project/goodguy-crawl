@@ -2,7 +2,7 @@ from typing import Union
 import logging
 import json
 from crawl_service.util.new_session import new_session
-from crawl_service.crawler.nowcoder.concurrency_control import CONCURRENCY_CONTROL
+from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
 def get_nowcoder_contest_data(handle: Union[str, int]) -> dict:
@@ -17,8 +17,7 @@ def get_nowcoder_contest_data(handle: Union[str, int]) -> dict:
     }
     try:
         url = f'https://ac.nowcoder.com/acm/contest/rating-history?uid={handle}'
-        task = CONCURRENCY_CONTROL.submit(new_session().get, url)
-        rsp = task.result()
+        rsp = RequestExecutorManage.work('nowcoder', new_session().get, url)
         obj = json.loads(rsp.text)
         res['status'] = obj["msg"]
         res["handle"] = str(handle)

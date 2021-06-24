@@ -2,15 +2,15 @@ import json
 import logging
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.vjudge.login import login
-from crawl_service.crawler.vjudge.concurrency_control import CONCURRENCY_CONTROL
-from crawl_service.util.config import CONFIG
+from crawl_service.crawler.request_executor import RequestExecutorManage
+from crawl_service.util.config import GLOBAL_CONFIG
 
 
 def get_vjudge_submit_data(handle: str):
     session = new_session()
-    if not login(session, CONFIG.get("vjudge.username"), CONFIG.get("vjudge.password")):
-        raise ValueError(f"login failed with username {CONFIG.get('vjudge.username')} and "
-                         f"password {CONFIG.get('vjudge.password')}")
+    if not login(session, GLOBAL_CONFIG.get("vjudge.username"), GLOBAL_CONFIG.get("vjudge.password")):
+        raise ValueError(f"login failed with username {GLOBAL_CONFIG.get('vjudge.username')} and "
+                         f"password {GLOBAL_CONFIG.get('vjudge.password')}")
     res = {
         'status': 'unknown error',
         'handle': handle,
@@ -23,12 +23,12 @@ def get_vjudge_submit_data(handle: str):
     try:
         max_id = ""
         while True:
-            task = CONCURRENCY_CONTROL.submit(session.get, "https://vjudge.net/user/submissions", params={
+            task = RequestExecutorManage.work('vjudge', session.get, "https://vjudge.net/user/submissions", params={
                 "username": handle,
                 "pageSize": 500,
                 "maxId": max_id,
             })
-            rsp = json.loads(task.result().text)
+            rsp = json.loads(task.text)
             if len(rsp["data"]) == 0:
                 break
             max_id = rsp["data"][-1][0] - 1

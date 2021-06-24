@@ -2,7 +2,7 @@ import logging
 import datetime
 from lxml import etree
 from crawl_service.util.new_session import new_session
-from crawl_service.crawler.atcoder.concurrency_control import CONCURRENCY_CONTROL
+from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
 def get_atcoder_contest_data(handle: str) -> dict:
@@ -18,8 +18,7 @@ def get_atcoder_contest_data(handle: str) -> dict:
     }
     try:
         url = f'https://atcoder.jp/users/{handle}/history'
-        task = CONCURRENCY_CONTROL.submit(session.get, url)
-        html = task.result().text
+        html = RequestExecutorManage.work('atcoder', session.get, url).text
         obj = etree.HTML(html)
         source = obj.xpath('//table[@id="history"]//tr[contains(@class, "text-center")]')
         record = res['record']
