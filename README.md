@@ -10,7 +10,7 @@ A gRPC-Python service for real-time crawlers to obtain information.
 |----|----|----|----|
 |[codeforces](https://codeforces.com/)|√|√|√|
 |[atcoder](https://atcoder.jp)|√| |√|
-|[nowcoder](https://nowcoder.com)|√| | |
+|[nowcoder](https://nowcoder.com)|√| |√|
 |[luogu](https://luogu.com.cn)| |√| |
 |[vjudge](https://vjudge.net)| |√| |
 |[leetcode](https://leetcode-cn.com)| | |√|
