@@ -1,7 +1,5 @@
 import datetime
-
 from lxml import etree
-
 from crawl_service.crawler.request_executor import RequestExecutorManage
 from crawl_service.util.new_session import new_session
 
