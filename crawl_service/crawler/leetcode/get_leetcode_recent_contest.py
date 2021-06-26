@@ -1,5 +1,6 @@
 import json
 from crawl_service.util.new_session import new_session
+from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
 def get_leetcode_recent_contest() -> dict:
@@ -11,7 +12,7 @@ def get_leetcode_recent_contest() -> dict:
                  "titleSlug\n    description\n    startTime\n    duration\n    originStartTime\n    isVirtual\n    "
                  "company {\n      watermark\n      __typename\n    }\n    __typename\n  }\n}\n "
     }).encode('utf-8')
-    cookies = session.get('https://leetcode-cn.com/contest/').cookies
+    cookies = RequestExecutorManage.work('leetcode', session.get, 'https://leetcode-cn.com/contest/').cookies
     csrftoken = None
     for cookie in cookies:
         if cookie.name == 'csrftoken':
@@ -25,7 +26,9 @@ def get_leetcode_recent_contest() -> dict:
         "Connection": 'keep-alive',
         "Content-Type": 'application/json',
     }
-    result = session.post(
+    result = RequestExecutorManage.work(
+        'leetcode',
+        session.post,
         'https://leetcode-cn.com/graphql',
         data=data,
         headers=headers
