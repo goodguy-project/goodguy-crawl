@@ -1,8 +1,10 @@
 import json
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
+from crawl_service.util.loading_cache import loading_cache
 
 
+@loading_cache()
 def get_leetcode_recent_contest() -> dict:
     session = new_session()
     data = json.dumps({

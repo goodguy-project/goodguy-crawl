@@ -2,6 +2,7 @@ import logging
 import json
 import requests
 from crawl_service.crawler.request_executor import RequestExecutorManage
+from crawl_service.util.loading_cache import loading_cache
 
 
 def get_codeforces_status(handle: str) -> dict:
@@ -17,6 +18,7 @@ def get_codeforces_status(handle: str) -> dict:
         }
 
 
+@loading_cache()
 def get_codeforces_submit_data(handle: str) -> dict:
     logging.info(f'crawling codeforces handle: {handle}')
     res = {
