@@ -17,24 +17,21 @@ def get_nowcoder_contest_data(handle: Union[str, int]) -> dict:
         'profile_url': f"https://ac.nowcoder.com/acm/home/{handle}",
         'length': 0,
     }
-    try:
-        url = f'https://ac.nowcoder.com/acm/contest/rating-history?uid={handle}'
-        rsp = RequestExecutorManage.work('nowcoder', new_session().get, url)
-        obj = json.loads(rsp.text)
-        res['status'] = obj["msg"]
-        res["handle"] = str(handle)
-        res["length"] = len(obj["data"])
-        if len(obj["data"]):
-            res["rating"] = int(obj["data"][-1]["rating"])
-        for value in obj["data"]:
-            res['record'].append({
-                'timestamp': value["time"] // 1000,
-                'rating': int(value["rating"]),
-                'name': value["contestName"],
-                'url': f"https://ac.nowcoder.com/acm/contest/{value['contestId']}",
-            })
-    except Exception as e:
-        logging.exception(e)
+    url = f'https://ac.nowcoder.com/acm/contest/rating-history?uid={handle}'
+    rsp = RequestExecutorManage.work('nowcoder', new_session().get, url)
+    obj = json.loads(rsp.text)
+    res['status'] = obj["msg"]
+    res["handle"] = str(handle)
+    res["length"] = len(obj["data"])
+    if len(obj["data"]):
+        res["rating"] = int(obj["data"][-1]["rating"])
+    for value in obj["data"]:
+        res['record'].append({
+            'timestamp': value["time"] // 1000,
+            'rating': int(value["rating"]),
+            'name': value["contestName"],
+            'url': f"https://ac.nowcoder.com/acm/contest/{value['contestId']}",
+        })
     return res
 
 

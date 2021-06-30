@@ -1,3 +1,4 @@
+import time
 import grpc
 import threading
 from crawl_service import crawl_service_pb2
@@ -6,9 +7,16 @@ from crawl_service import crawl_service_pb2_grpc
 
 def start_new_thread(func, *args, **kwargs):
     class MyThead(threading.Thread):
+        def __init__(self):
+            super().__init__()
+            self.setDaemon(False)
+
         def run(self) -> None:
-            ans = func(*args, **kwargs)
-            print(ans)
+            try:
+                ans = func(*args, **kwargs)
+                print(ans)
+            except:
+                pass
 
     MyThead().start()
 
@@ -43,11 +51,12 @@ if __name__ == '__main__':
     start_new_thread(f, 'codeforces', 'ConanYu')
     start_new_thread(f, 'codeforces', 'ConanYu')
     start_new_thread(f, 'codeforces', 'ConanYu')
-    start_new_thread(f, 'codeforces', 'ConanYu')
-    # start_new_thread(g, 'vjudge', 'ConanYu')
-    # start_new_thread(f, 'atcoder', 'ConanYu')
-    # start_new_thread(g, 'codeforces', 'ConanYu')
-    # start_new_thread(h, 'nowcoder')
-    # start_new_thread(h, 'leetcode')
-    # start_new_thread(h, 'atcoder')
-    # start_new_thread(h, 'codeforces')
+    start_new_thread(f, 'codeforces', '????????')
+    start_new_thread(g, 'vjudge', 'ConanYu')
+    start_new_thread(f, 'atcoder', 'ConanYu')
+    start_new_thread(g, 'codeforces', 'ConanYu')
+    start_new_thread(h, 'nowcoder')
+    start_new_thread(h, 'leetcode')
+    start_new_thread(h, 'atcoder')
+    start_new_thread(h, 'codeforces')
+    time.sleep(5.0)

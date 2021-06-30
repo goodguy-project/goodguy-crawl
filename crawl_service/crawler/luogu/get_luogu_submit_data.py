@@ -38,22 +38,19 @@ def get_luogu_submit_data(handle: str) -> dict:
         'profile_url': f"https://www.luogu.com.cn",
         'distribution': dict(),
     }
-    try:
-        user_id = get_luogu_userid(handle)
-        res['profile_url'] = f"https://www.luogu.com.cn/user/{user_id}"
-        msg = get_luogu_submit_msg(user_id)
-        res['accept_count'] = msg["currentData"]["user"]["passedProblemCount"]
-        res['submit_count'] = msg["currentData"]["user"]["submittedProblemCount"]
-        distribution = res['distribution']
-        accept_problem_set = set()
-        for accept_problem in msg["currentData"]["passedProblems"]:
-            if accept_problem["pid"] not in accept_problem_set:
-                accept_problem_set.add(accept_problem["pid"])
-                diff = accept_problem["difficulty"] * 100 + 100
-                distribution[diff] = distribution.get(diff, 0) + 1
-        res['status'] = 'OK'
-    except Exception as e:
-        logging.exception(e)
+    user_id = get_luogu_userid(handle)
+    res['profile_url'] = f"https://www.luogu.com.cn/user/{user_id}"
+    msg = get_luogu_submit_msg(user_id)
+    res['accept_count'] = msg["currentData"]["user"]["passedProblemCount"]
+    res['submit_count'] = msg["currentData"]["user"]["submittedProblemCount"]
+    distribution = res['distribution']
+    accept_problem_set = set()
+    for accept_problem in msg["currentData"]["passedProblems"]:
+        if accept_problem["pid"] not in accept_problem_set:
+            accept_problem_set.add(accept_problem["pid"])
+            diff = accept_problem["difficulty"] * 100 + 100
+            distribution[diff] = distribution.get(diff, 0) + 1
+    res['status'] = 'OK'
     return res
 
 

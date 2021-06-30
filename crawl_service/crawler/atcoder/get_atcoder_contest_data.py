@@ -18,30 +18,27 @@ def get_atcoder_contest_data(handle: str) -> dict:
         'profile_url': f"https://atcoder.jp/users/{handle}",
         'length': 0,
     }
-    try:
-        url = f'https://atcoder.jp/users/{handle}/history'
-        html = RequestExecutorManage.work('atcoder', session.get, url).text
-        obj = etree.HTML(html)
-        source = obj.xpath('//table[@id="history"]//tr[contains(@class, "text-center")]')
-        record = res['record']
-        for item in source:
-            table = etree.tostring(item)
-            table = etree.HTML(table)
-            performance = table.xpath('//td[4]')[0].text
-            if performance == '-':
-                continue
-            record.append({
-                'timestamp': int(datetime.datetime.strptime(table.xpath('//td[1]/@data-order')[0],
-                                                   '%Y/%m/%d %H:%M:%S').timestamp()),
-                'name': table.xpath('//td[2]/a[1]')[0].text,
-                'url': "https://atcoder.jp" + table.xpath('//td[2]/a[1]/@href')[0],
-                'rating': int(table.xpath('//td[5]/span')[0].text),
-            })
-        res['status'] = 'OK'
-        res['rating'] = record[-1]["rating"] if len(record) else 0
-        res['length'] = len(record)
-    except Exception as e:
-        logging.exception(e)
+    url = f'https://atcoder.jp/users/{handle}/history'
+    html = RequestExecutorManage.work('atcoder', session.get, url).text
+    obj = etree.HTML(html)
+    source = obj.xpath('//table[@id="history"]//tr[contains(@class, "text-center")]')
+    record = res['record']
+    for item in source:
+        table = etree.tostring(item)
+        table = etree.HTML(table)
+        performance = table.xpath('//td[4]')[0].text
+        if performance == '-':
+            continue
+        record.append({
+            'timestamp': int(datetime.datetime.strptime(table.xpath('//td[1]/@data-order')[0],
+                                               '%Y/%m/%d %H:%M:%S').timestamp()),
+            'name': table.xpath('//td[2]/a[1]')[0].text,
+            'url': "https://atcoder.jp" + table.xpath('//td[2]/a[1]/@href')[0],
+            'rating': int(table.xpath('//td[5]/span')[0].text),
+        })
+    res['status'] = 'OK'
+    res['rating'] = record[-1]["rating"] if len(record) else 0
+    res['length'] = len(record)
     return res
 
 
