@@ -1,13 +1,16 @@
 certifi==2021.5.30
 chardet==4.0.0
+charset-normalizer==2.0.1
 grpcio==1.38.0
 grpcio-tools==1.38.0
 idna==2.10
 lxml==4.6.3
 protobuf==3.17.1
+pydantic==1.8.2
 PyYAML==5.4.1
 readerwriterlock==1.0.8
-requests==2.25.1
+requests==2.26.0
 six==1.16.0
 typing-extensions==3.10.0.0
 urllib3==1.26.5
+wrapt==1.12.1
