@@ -1,12 +1,12 @@
 import logging
 import datetime
 from lxml import etree
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_atcoder_contest_data(handle: str) -> dict:
     logging.info(f'crawling atcoder handle: {handle}')
     session = new_session()

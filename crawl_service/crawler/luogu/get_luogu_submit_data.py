@@ -2,7 +2,7 @@ import re
 import json
 import urllib
 import logging
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
@@ -27,7 +27,7 @@ def get_luogu_submit_msg(user_id: int) -> dict:
     return json.loads(urllib.parse.unquote(msg))
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_luogu_submit_data(handle: str) -> dict:
     logging.info(f'crawling luogu handle: {handle}')
     res = {

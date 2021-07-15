@@ -1,7 +1,7 @@
 import datetime
 from lxml import etree
 from crawl_service.crawler.request_executor import RequestExecutorManage
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 from crawl_service.util.new_session import new_session
 
 
@@ -42,7 +42,7 @@ def get_nowcoder_unofficial_contest() -> list:
     return [handle_element(contest, False) for contest in contests]
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_nowcoder_recent_contest() -> dict:
     return {
         "status": "OK",
