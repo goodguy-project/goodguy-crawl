@@ -45,6 +45,7 @@ message RecentContest {
         string url = 2;
         int64 timestamp = 3; // 单位：秒
         map<string, string> ext_info = 4; // 额外信息
+        int32 duration = 5; // 单位：秒
     }
     repeated ContestMessage recent_contest = 1;
 }

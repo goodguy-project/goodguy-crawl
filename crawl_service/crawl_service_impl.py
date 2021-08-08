@@ -75,6 +75,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
                 url=data.get("url", ""),
                 timestamp=data.get("time", 0),
                 ext_info=data.get("ext_info", dict()),
+                duration=data.get("duration", 0),
             ))
         return crawl_service_pb2.RecentContest(
             recent_contest=recent_contest,

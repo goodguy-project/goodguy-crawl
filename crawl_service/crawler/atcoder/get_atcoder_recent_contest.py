@@ -1,7 +1,8 @@
-import logging
 import datetime
 from lxml import etree
 from cachetools.func import ttl_cache
+
+from crawl_service.crawler.atcoder.get_atcoder_contest_duration import get_atcoder_contest_duration
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
@@ -24,7 +25,8 @@ def get_atcoder_recent_contest() -> dict:
         ret.append({
             "time": int(start_time),
             "name": contests[idx].text,
-            "url": "https://atcoder.jp" + urls[idx]
+            "url": "https://atcoder.jp" + urls[idx],
+            "duration": get_atcoder_contest_duration("https://atcoder.jp" + urls[idx]),
         })
     return {
         "status": "OK",

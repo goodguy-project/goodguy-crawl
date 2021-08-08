@@ -17,6 +17,7 @@ def get_codeforces_recent_contest() -> dict:
                 "time": contest['startTimeSeconds'],
                 "name": contest['name'],
                 "url": f"https://codeforces.com/contest/{contest['id']}",
+                "duration": contest['durationSeconds'],
             })
     return {
         "status": "OK",

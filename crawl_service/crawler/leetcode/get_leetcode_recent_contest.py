@@ -41,6 +41,7 @@ def get_leetcode_recent_contest() -> dict:
             "time": contest.get('startTime', 0),
             "name": contest.get('title', ''),
             "url": "https://leetcode-cn.com/contest",
+            "duration": contest.get('duration', 0),
         }
         ret.append(item)
     return {
