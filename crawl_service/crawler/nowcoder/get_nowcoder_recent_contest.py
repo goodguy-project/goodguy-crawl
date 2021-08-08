@@ -1,7 +1,7 @@
 import datetime
 from lxml import etree
 from crawl_service.crawler.request_executor import RequestExecutorManage
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 from crawl_service.util.new_session import new_session
 
 
@@ -9,16 +9,23 @@ def get_start_time_from_str(msg: str) -> int:
     return int(datetime.datetime.strptime(msg[5: 21], "%Y-%m-%d %H:%M").timestamp())
 
 
+def get_end_time_from_str(msg: str) -> int:
+    return int(datetime.datetime.strptime(msg[24: 40], "%Y-%m-%d %H:%M").timestamp())
+
+
 def handle_element(element: etree._Element, is_official: bool) -> dict:
     html = etree.HTML(etree.tostring(element))
+    start = get_start_time_from_str(html.xpath('//li[@class="match-time-icon"]')[0].text.replace('\n', ''))
+    end = get_end_time_from_str(html.xpath('//li[@class="match-time-icon"]')[0].text.replace('\n', ''))
     return {
         "name": html.xpath('//a')[0].text,
-        "time": get_start_time_from_str(html.xpath('//li[@class="match-time-icon"]')[0].text.replace('\n', '')),
+        "time": start,
         "url": 'https://nowcoder.com' + html.xpath('//a/@href')[0],
         "ext_info": {
             "user": html.xpath('//li[@class="user-icon"]')[0].text,
             "type": 'official' if is_official else 'unofficial',
         },
+        "duration": end - start,
     }
 
 
@@ -42,7 +49,7 @@ def get_nowcoder_unofficial_contest() -> list:
     return [handle_element(contest, False) for contest in contests]
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_nowcoder_recent_contest() -> dict:
     return {
         "status": "OK",

@@ -4,10 +4,10 @@ from crawl_service.util.new_session import new_session
 from crawl_service.crawler.vjudge.login import login
 from crawl_service.crawler.request_executor import RequestExecutorManage
 from crawl_service.util.config import GLOBAL_CONFIG
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_vjudge_submit_data(handle: str):
     session = new_session()
     if not login(session, GLOBAL_CONFIG.get("vjudge.username"), GLOBAL_CONFIG.get("vjudge.password")):

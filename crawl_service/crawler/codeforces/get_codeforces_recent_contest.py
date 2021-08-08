@@ -1,10 +1,10 @@
 import json
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_codeforces_recent_contest() -> dict:
     session = new_session()
     response = RequestExecutorManage.work('codeforces', session.get,
@@ -17,6 +17,7 @@ def get_codeforces_recent_contest() -> dict:
                 "time": contest['startTimeSeconds'],
                 "name": contest['name'],
                 "url": f"https://codeforces.com/contest/{contest['id']}",
+                "duration": contest['durationSeconds'],
             })
     return {
         "status": "OK",

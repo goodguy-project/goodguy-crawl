@@ -1,12 +1,12 @@
 from typing import Union
 import logging
 import json
-from crawl_service.util.loading_cache import loading_cache
+from cachetools.func import ttl_cache
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
 
-@loading_cache()
+@ttl_cache(ttl=7200)
 def get_nowcoder_contest_data(handle: Union[str, int]) -> dict:
     logging.info(f'crawling nowcoder handle: {handle}')
     res = {
