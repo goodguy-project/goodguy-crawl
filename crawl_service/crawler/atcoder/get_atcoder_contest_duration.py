@@ -15,7 +15,7 @@ def get_atcoder_contest_duration(abs_url: str) -> int:
     for c in text:
         if 48 <= ord(c) <= 57:
             ret = ret * 10 + int(c)
-    return ret
+    return ret * 60
 
 
 if __name__ == '__main__':
