@@ -40,7 +40,7 @@ def get_leetcode_recent_contest() -> dict:
         item = {
             "time": contest.get('startTime', 0),
             "name": contest.get('title', ''),
-            "url": "https://leetcode-cn.com/contest",
+            "url": f"https://leetcode-cn.com/contest/{contest.get('titleSlug', '')}",
             "duration": contest.get('duration', 0),
         }
         ret.append(item)
