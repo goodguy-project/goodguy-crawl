@@ -1,3 +1,7 @@
 vjudge:
   username: ~
   password: ~
+
+server:
+  host: ~
+  port: ~

@@ -28,8 +28,10 @@ class Config(object):
                     return default
                 try:
                     ret = ret[arg]
-                except:
+                except KeyError:
                     return default
+            if ret is None:
+                return default
             return deepcopy(ret)
 
 
