@@ -1,10 +1,10 @@
 FROM ubuntu:latest
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONPATH=/home/env
 
-ENV PYTHONPATH=/home
+RUN mkdir /home/env
 
-ADD ./* /home
+COPY ./ /home/env
 
 RUN apt-get update \
   && apt-get install -y python3-pip python3-dev \
@@ -12,9 +12,7 @@ RUN apt-get update \
   && ln -s /usr/bin/python3 python \
   && pip3 install --upgrade pip
 
-ENTRYPOINT ["python3"]
-
-WORKDIR /home
+WORKDIR /home/env
 
 RUN pip3 install -r requirements.txt
 
