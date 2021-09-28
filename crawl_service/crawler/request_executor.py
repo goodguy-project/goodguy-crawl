@@ -18,6 +18,9 @@ class RequestExecutorManage(object):
             count = GLOBAL_CONFIG.get(f"{key}.request_thread_count", 1)
             executor = RequestExecutor(max_workers=count)
             RequestExecutorManage.workers[key] = executor
+        if kwargs.get("timeout") is None:
+            default_timeout = GLOBAL_CONFIG.get("default.request_time_out", 60)
+            kwargs["timeout"] = GLOBAL_CONFIG.get(f"{key}.request_time_out", default_timeout)
         return executor.sync_work(func, *args, **kwargs)
 
     workers = dict()

@@ -1,7 +1,11 @@
 vjudge:
   username: ~
   password: ~
+  timeout: 300
 
 server:
   host: ~
   port: ~
+
+default:
+  timeout: 60
