@@ -2,6 +2,7 @@ requests
 cachetools
 readerwriterlock
 grpcio
+grpcio-tools
 lxml
 protobuf
 PyYAML
