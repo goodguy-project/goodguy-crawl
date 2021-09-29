@@ -37,8 +37,6 @@ Linux: [Install docker command](https://command-not-found.com/docker)
 
 Then localhost:50050 is the address of goodguy-crawl.
 
-### Use docker built by author (undone)
-
 ### Local Environment
 
 - Use Python3.6+
