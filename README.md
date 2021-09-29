@@ -25,13 +25,17 @@ Windows/Mac: [Docker Desktop](https://www.docker.com/get-started)
 
 Linux: [Install docker command](https://command-not-found.com/docker)
 
+- Config config.yml (optional)
+
 - Build docker image
 
 `docker build -t goodguy-crawl .`
 
 - Run docker
 
-`docker run -p 50051:50051 -dit goodguy-crawl python3 crawl_service/server.py`
+`docker run -p 50050:50051 -dit goodguy-crawl python3 crawl_service/server.py`
+
+Then localhost:50050 is the address of goodguy-crawl.
 
 ### Use docker built by author (undone)
 
@@ -43,6 +47,6 @@ Linux: [Install docker command](https://command-not-found.com/docker)
 
 - run build.py
 
-- Configure VJudge information (optional)
+- Configure config.yml (optional)
 
 - run crawl_service\server.py
