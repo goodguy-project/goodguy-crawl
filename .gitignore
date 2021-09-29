@@ -133,3 +133,7 @@ bazel-bin/*
 bazel-crawlservice/*
 bazel-out/*
 bazel-testlogs/*
+
+# nodejs
+node_modules/
+package-lock.json
