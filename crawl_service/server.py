@@ -10,7 +10,7 @@ from crawl_service.util.net import get_local_ip
 
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=GLOBAL_CONFIG.get("server.worker", 10)))
     crawl_service_pb2_grpc.add_CrawlServiceServicer_to_server(CrawlServiceImpl(), server)
     host = GLOBAL_CONFIG.get("server.host", get_local_ip())
     port = GLOBAL_CONFIG.get("server.port", 50051)

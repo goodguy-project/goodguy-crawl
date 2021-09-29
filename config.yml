@@ -5,7 +5,8 @@ vjudge:
 
 server:
   host: ~
-  port: ~
+  port: 50051
+  worker: 10
 
 default:
   timeout: 60
