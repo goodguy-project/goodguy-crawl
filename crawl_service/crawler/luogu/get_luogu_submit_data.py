@@ -1,8 +1,10 @@
-import re
 import json
-import urllib
 import logging
+import re
+from urllib.parse import unquote
+
 from cachetools.func import ttl_cache
+
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
@@ -24,7 +26,7 @@ def get_luogu_submit_msg(user_id: int) -> dict:
     })
     f, t = re.search(r'decodeURIComponent\(.*\"\)', rsp.text).span()
     msg = rsp.text[f + len('decodeURIComponent("'): t - len('")')]
-    return json.loads(urllib.parse.unquote(msg))
+    return json.loads(unquote(msg))
 
 
 @ttl_cache(ttl=7200)
@@ -55,4 +57,4 @@ def get_luogu_submit_data(handle: str) -> dict:
 
 
 if __name__ == '__main__':
-    print(get_luogu_submit_data("Fee_clе6418"))
+    print(get_luogu_submit_data("YuZining"))
