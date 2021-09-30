@@ -5,6 +5,7 @@ from crawl_service.crawler.atcoder.get_atcoder_recent_contest import get_atcoder
 from crawl_service.crawler.codeforces.get_codeforces_contest_data import get_codeforces_contest_data
 from crawl_service.crawler.codeforces.get_codeforces_recent_contest import get_codeforces_recent_contest
 from crawl_service.crawler.codeforces.get_codeforces_submit_data import get_codeforces_submit_data
+from crawl_service.crawler.leetcode.get_leetcode_contest_record import get_leetcode_contest_record
 from crawl_service.crawler.leetcode.get_leetcode_recent_contest import get_leetcode_recent_contest
 from crawl_service.crawler.luogu.get_luogu_submit_data import get_luogu_submit_data
 from crawl_service.crawler.nowcoder.get_nowcoder_contest_data import get_nowcoder_contest_data
@@ -22,6 +23,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             'atcoder': get_atcoder_contest_data,
             'codeforces': get_codeforces_contest_data,
             'nowcoder': get_nowcoder_contest_data,
+            'leetcode': get_leetcode_contest_record,
         }
         ret = impl[request.platform](request.handle)
         records = []

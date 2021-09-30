@@ -1,4 +1,6 @@
 import json
+
+from crawl_service.crawler.leetcode.get_leetcode_csrf_token import get_leetcode_csrf_token
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 from cachetools.func import ttl_cache
@@ -14,15 +16,10 @@ def get_leetcode_recent_contest() -> dict:
                  "titleSlug\n    description\n    startTime\n    duration\n    originStartTime\n    isVirtual\n    "
                  "company {\n      watermark\n      __typename\n    }\n    __typename\n  }\n}\n "
     }).encode('utf-8')
-    cookies = RequestExecutorManage.work('leetcode', session.get, 'https://leetcode-cn.com/contest/').cookies
-    csrftoken = None
-    for cookie in cookies:
-        if cookie.name == 'csrftoken':
-            csrftoken = cookie.value
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/79.0.3945.130 Safari/537.36",
-        "x-csrftoken": csrftoken,
+        "x-csrftoken": get_leetcode_csrf_token(session, 'https://leetcode-cn.com/contest/'),
         "origin": 'https://leetcode-cn.com',
         "referer": 'https://leetcode-cn.com/contest/',
         "Connection": 'keep-alive',

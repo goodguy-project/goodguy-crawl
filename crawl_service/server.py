@@ -16,7 +16,7 @@ def serve():
     port = GLOBAL_CONFIG.get("server.port", 50051)
     server.add_insecure_port(f'{host}:{port}')
     server.start()
-    print('crawl service is running...')
+    print(f'crawl service is serving on {host}:{port}')
     server.wait_for_termination()
 
 
