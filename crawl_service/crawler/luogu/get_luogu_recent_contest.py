@@ -20,7 +20,7 @@ def get_luogu_recent_contest():
         recent_contest.append({
             "name": c["name"],
             "url": f'https://www.luogu.com.cn/contest/{c["id"]}',
-            "timestamp": c["startTime"],
+            "time": c["startTime"],
             "duration": c["endTime"] - c["startTime"],
         })
     return {
