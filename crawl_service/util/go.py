@@ -10,9 +10,11 @@ class _Thread(threading.Thread):
         self.__kwargs = kwargs
         self.res = None
         self.setDaemon(daemon)
+        self.done = False
 
     def run(self) -> None:
         self.res = self.__func(*self.__args, **self.__kwargs)
+        self.done = True
 
 
 class _Promise(object):
@@ -23,6 +25,10 @@ class _Promise(object):
     def get(self):
         self.__thread.join()
         return self.__thread.res
+
+    @property
+    def done(self):
+        return self.__thread.done
 
 
 def go(daemon: bool = False):

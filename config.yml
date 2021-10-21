@@ -10,3 +10,7 @@ server:
 
 default:
   timeout: 60
+
+websocket:
+  host: ~
+  port: 50052
