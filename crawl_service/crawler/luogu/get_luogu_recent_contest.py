@@ -2,6 +2,8 @@ import json
 import re
 from urllib.parse import unquote
 
+from cachetools.func import ttl_cache
+
 from crawl_service.crawler.request_executor import RequestExecutorManage
 from crawl_service.util.new_session import new_session
 
@@ -13,6 +15,7 @@ def get_luogu_contest_msg() -> dict:
     return json.loads(unquote(msg))
 
 
+@ttl_cache(ttl=7200)
 def get_luogu_recent_contest():
     msg = get_luogu_contest_msg()
     recent_contest = []
