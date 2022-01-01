@@ -19,10 +19,10 @@ function loadProto(path) {
 let proto = loadProto(__dirname + '/../../crawl_service/crawl_service.proto');
 
 function main() {
-    let client = new proto.CrawlService('localhost:50050', grpc.credentials.createInsecure());
+    let client = new proto.CrawlService('localhost:9851', grpc.credentials.createInsecure());
 
     client.GetRecentContest({platform: "codeforces"}, function(err, response) {
-        console.log('Greeting:', response);
+        console.log('Response:', response);
     });
 }
 

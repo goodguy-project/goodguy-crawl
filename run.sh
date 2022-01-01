@@ -1,0 +1,1 @@
+python3 crawl_service/server.py & envoy -c envoy.yaml

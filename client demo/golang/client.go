@@ -12,7 +12,7 @@ import (
 
 func GetClient() (*grpc.ClientConn, *pb.CrawlServiceClient, error) {
 	conn, err := grpc.Dial(
-		fmt.Sprintf("%s:%d", "localhost", 50050),
+		fmt.Sprintf("%s:%d", "localhost", 9851),
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
@@ -42,8 +42,8 @@ func main() {
 		Platform: platform,
 	})
 	if err != nil {
-		fmt.Println("get recent contest failed. platform=%s, err=%v\n", platform, err.Error())
+		fmt.Printf("get recent contest failed. platform=%s, err=%s\n", platform, err.Error())
 		return
 	}
-	fmt.Println(*rsp)
+	fmt.Println(rsp)
 }

@@ -22,7 +22,7 @@ def start_new_thread(func, *args, **kwargs):
 
 
 def f(platform: str, handle: str):
-    with grpc.insecure_channel('localhost:50050') as channel:
+    with grpc.insecure_channel('localhost:9851') as channel:
         stub = crawl_service_pb2_grpc.CrawlServiceStub(channel)
         return stub.GetUserContestRecord(crawl_service_pb2.GetUserSubmitRecordRequest(
             platform=platform,
@@ -31,7 +31,7 @@ def f(platform: str, handle: str):
 
 
 def g(platform: str, handle: str):
-    with grpc.insecure_channel('localhost:50050') as channel:
+    with grpc.insecure_channel('localhost:9851') as channel:
         stub = crawl_service_pb2_grpc.CrawlServiceStub(channel)
         return stub.GetUserSubmitRecord(crawl_service_pb2.GetUserSubmitRecordRequest(
             platform=platform,
@@ -40,7 +40,7 @@ def g(platform: str, handle: str):
 
 
 def h(platform: str):
-    with grpc.insecure_channel('localhost:50050') as channel:
+    with grpc.insecure_channel('localhost:9851') as channel:
         stub = crawl_service_pb2_grpc.CrawlServiceStub(channel)
         return stub.GetRecentContest(crawl_service_pb2.GetRecentContestRequest(
             platform=platform,
