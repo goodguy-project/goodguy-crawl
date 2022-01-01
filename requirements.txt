@@ -6,4 +6,3 @@ grpcio-tools
 lxml
 protobuf
 PyYAML
-websockets

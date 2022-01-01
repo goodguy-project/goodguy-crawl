@@ -17,7 +17,7 @@ A gRPC-Python service for real-time crawlers to obtain information.
 
 ## How to use
 
-### Use locally built docker (recommend)
+- Install Make tool
 
 - Install docker
 
@@ -29,22 +29,10 @@ Linux: [Install docker command](https://command-not-found.com/docker)
 
 - Build docker image
 
-`docker build -t goodguy-crawl .`
+`make docker_build`
 
 - Run docker
 
-`docker run -p 50050:50051 -dit goodguy-crawl python3 crawl_service/server.py`
+`make docker_run`
 
-Then localhost:50050 is the address of goodguy-crawl.
-
-### Local Environment
-
-- Use Python3.6+
-
-- Install requirements 
-
-- run build.py
-
-- Configure config.yml (optional)
-
-- run crawl_service\server.py
+Then localhost:9851 is the address of goodguy-crawl.(grpc-web use localhost:9852)
