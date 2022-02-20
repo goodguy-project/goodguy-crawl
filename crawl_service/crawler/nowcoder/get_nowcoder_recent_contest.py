@@ -6,11 +6,11 @@ from crawl_service.util.new_session import new_session
 
 
 def get_start_time_from_str(msg: str) -> int:
-    return int(datetime.datetime.strptime(msg[5: 21], "%Y-%m-%d %H:%M").timestamp())
+    return int(datetime.datetime.strptime(msg[9: 25], "%Y-%m-%d %H:%M").timestamp())
 
 
 def get_end_time_from_str(msg: str) -> int:
-    return int(datetime.datetime.strptime(msg[24: 40], "%Y-%m-%d %H:%M").timestamp())
+    return int(datetime.datetime.strptime(msg[32: 48], "%Y-%m-%d %H:%M").timestamp())
 
 
 def handle_element(element: etree._Element, is_official: bool) -> dict:
