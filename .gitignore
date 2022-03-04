@@ -141,3 +141,5 @@ package-lock.json
 # protobuf python file
 crawl_service/crawl_service_pb2.py
 crawl_service/crawl_service_pb2_grpc.py
+
+.idea/
