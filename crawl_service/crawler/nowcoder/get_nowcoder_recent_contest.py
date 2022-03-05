@@ -1,16 +1,25 @@
-import datetime
-from lxml import etree
-from crawl_service.crawler.request_executor import RequestExecutorManage
+from datetime import datetime, timezone, timedelta
+
 from cachetools.func import ttl_cache
+from lxml import etree
+
+from crawl_service.crawler.request_executor import RequestExecutorManage
 from crawl_service.util.new_session import new_session
 
 
+def get_timestamp_from_str(s: str) -> int:
+    t = datetime.strptime(s, "%Y-%m-%d %H:%M")
+    t = t.replace(tzinfo=timezone(timedelta(hours=8)))
+    print(t)
+    return int(t.timestamp())
+
+
 def get_start_time_from_str(msg: str) -> int:
-    return int(datetime.datetime.strptime(msg[9: 25], "%Y-%m-%d %H:%M").timestamp())
+    return get_timestamp_from_str(msg[9: 25])
 
 
 def get_end_time_from_str(msg: str) -> int:
-    return int(datetime.datetime.strptime(msg[32: 48], "%Y-%m-%d %H:%M").timestamp())
+    return get_timestamp_from_str(msg[32: 48])
 
 
 def handle_element(element: etree._Element, is_official: bool) -> dict:
