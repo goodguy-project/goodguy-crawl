@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timezone, timedelta
 
 from cachetools.func import ttl_cache
@@ -10,8 +11,9 @@ from crawl_service.util.new_session import new_session
 def get_timestamp_from_str(s: str) -> int:
     t = datetime.strptime(s, "%Y-%m-%d %H:%M")
     t = t.replace(tzinfo=timezone(timedelta(hours=8)))
-    print(t)
-    return int(t.timestamp())
+    r = int(t.timestamp())
+    logging.debug(f'datetime: {t}, timestamp: {r}')
+    return r
 
 
 def get_start_time_from_str(msg: str) -> int:
@@ -67,4 +69,5 @@ def get_nowcoder_recent_contest() -> dict:
 
 
 if __name__ == '__main__':
+    logging.getLogger().setLevel(logging.DEBUG)
     print(get_nowcoder_recent_contest())
