@@ -1,5 +1,4 @@
 PYTHON_EXE=
-RENAME_EXE=
 
 ifeq ($(OS), Windows_NT)
 	PYTHON_EXE+=python

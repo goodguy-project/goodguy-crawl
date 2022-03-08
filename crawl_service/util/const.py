@@ -9,6 +9,7 @@ PLATFORM_RECENT_CONTEST = [
     'leetcode',
     'luogu',
     'nowcoder',
+    'codechef',
 ]
 
 PLATFORM_ALL = [
@@ -18,4 +19,5 @@ PLATFORM_ALL = [
     'luogu',
     'nowcoder',
     'vjudge',
+    'codechef',
 ]
