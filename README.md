@@ -6,14 +6,15 @@ A gRPC-Python service for real-time crawlers to obtain information.
 
 ## Features
 
-|website|contest record|submit record|recent contest|
-|----|----|----|----|
-|[codeforces](https://codeforces.com/)|√|√|√|
-|[atcoder](https://atcoder.jp)|√| |√|
-|[nowcoder](https://nowcoder.com)|√| |√|
-|[luogu](https://luogu.com.cn)| |√|√|
-|[vjudge](https://vjudge.net)| |√| |
-|[leetcode](https://leetcode-cn.com)|√| |√|
+| website                               | contest record | submit record | recent contest |
+|---------------------------------------|----------------|---------------|----------------|
+| [codeforces](https://codeforces.com/) | √              | √             | √              |
+| [atcoder](https://atcoder.jp)         | √              |               | √              |
+| [nowcoder](https://nowcoder.com)      | √              |               | √              |
+| [luogu](https://luogu.com.cn)         |                | √             | √              |
+| [vjudge](https://vjudge.net)          |                | √             |                |
+| [leetcode](https://leetcode-cn.com)   | √              |               | √              |
+| [codechef](https://www.codechef.com/) |                |               | √              |
 
 ## How to use
 
