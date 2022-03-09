@@ -13,7 +13,7 @@ build:
 	docker build -t goodguy-crawl .
 
 run:
-	docker run -p 9851:50051 -p 9850:9850 -p 9852:9852 -dit --name="goodguy-crawl" goodguy-crawl sh run.sh
+	docker run -p 9851:50051 -p 9850:9850 -p 9852:9852 -dit --name="goodguy-crawl" goodguy-crawl
 
 clean:
 	-docker rm $$(docker stop $$(docker ps -a -q --filter="name=goodguy-crawl"))
