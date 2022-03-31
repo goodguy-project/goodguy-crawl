@@ -13,7 +13,7 @@ def get_codeforces_contest_data(handle: str) -> dict:
         'record': [],
         'handle': handle,
         'rating': 0,
-        'profile_url': f"https://atcoder.jp/users/{handle}",
+        'profile_url': f"https://codeforces.com/profile/{handle}",
         'length': 0,
     }
     task = RequestExecutorManage.work('codeforces', requests.get,
