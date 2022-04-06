@@ -18,13 +18,13 @@ def contest_list_to_data(contests: list) -> list:
             "time": iso_to_timestamp(contest['contest_start_date_iso']),
             "name": contest['contest_code'],
             "url": f"https://www.codechef.com/{contest['contest_code']}",
-            "duration": int(contest['contest_duration']),
+            "duration": int(contest['contest_duration']) * 60,
         })
     return r
 
 
 @ttl_cache(ttl=7200)
-def get_codechef_recent_contest() -> dict:
+def get_codechef_recent_contest():
     session = new_session()
     response = RequestExecutorManage.work(
         'codechef', session.get,

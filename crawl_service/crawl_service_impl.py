@@ -1,3 +1,5 @@
+import logging
+
 from crawl_service import crawl_service_pb2
 from crawl_service import crawl_service_pb2_grpc
 from crawl_service.crawler.atcoder.get_atcoder_contest_data import get_atcoder_contest_data
@@ -17,10 +19,8 @@ from crawl_service.crawler.vjudge.get_vjudge_submit_data import get_vjudge_submi
 
 class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
     @staticmethod
-    def GetUserContestRecord(request: crawl_service_pb2.GetUserContestRecordRequest, target, options=(),
-                             channel_credentials=None, call_credentials=None, insecure=False,
-                             compression=None, wait_for_ready=None, timeout=None,
-                             metadata=None) -> crawl_service_pb2.UserContestRecord:
+    def GetUserContestRecord(request: crawl_service_pb2.GetUserContestRecordRequest, *args,
+                             **kwargs) -> crawl_service_pb2.UserContestRecord:
         impl = {
             'atcoder': get_atcoder_contest_data,
             'codeforces': get_codeforces_contest_data,
@@ -41,12 +41,13 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             rating=ret.get('rating', 0),
             length=ret.get('length', 0),
             record=records,
+            platform=request.platform,
+            handle=request.handle,
         )
 
     @staticmethod
-    def GetUserSubmitRecord(request: crawl_service_pb2.GetUserSubmitRecordRequest, target, options=(),
-                            channel_credentials=None, call_credentials=None, insecure=False, compression=None,
-                            wait_for_ready=None, timeout=None, metadata=None) -> crawl_service_pb2.UserSubmitRecord:
+    def GetUserSubmitRecord(request: crawl_service_pb2.GetUserSubmitRecordRequest, *args,
+                            **kwargs) -> crawl_service_pb2.UserSubmitRecord:
         impl = {
             'codeforces': get_codeforces_submit_data,
             'luogu': get_luogu_submit_data,
@@ -59,12 +60,13 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             submit_count=ret.get('submit_count'),
             distribution=ret.get('distribution'),
             oj_distribution=ret.get('oj_distribution'),
+            platform=request.platform,
+            handle=request.handle,
         )
 
     @staticmethod
-    def GetRecentContest(request: crawl_service_pb2.GetRecentContestRequest, target, options=(),
-                         channel_credentials=None, call_credentials=None, insecure=False, compression=None,
-                         wait_for_ready=None, timeout=None, metadata=None) -> crawl_service_pb2.RecentContest:
+    def GetRecentContest(request: crawl_service_pb2.GetRecentContestRequest, *args,
+                         **kwargs) -> crawl_service_pb2.RecentContest:
         impl = {
             'atcoder': get_atcoder_recent_contest,
             'codeforces': get_codeforces_recent_contest,
@@ -85,4 +87,39 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             ))
         return crawl_service_pb2.RecentContest(
             recent_contest=recent_contest,
+            platform=request.platform,
         )
+
+    @staticmethod
+    def MGetUserContestRecord(request: crawl_service_pb2.MGetUserContestRecordRequest, *args,
+                              **kwargs) -> crawl_service_pb2.MGetUserContestRecordResponse:
+        response = []
+        for r in request.get_user_contest_record_request:
+            try:
+                response.append(CrawlServiceImpl.GetUserContestRecord(r))
+            except Exception as e:
+                logging.exception(e)
+        return response
+
+    @staticmethod
+    def MGetUserSubmitRecord(request: crawl_service_pb2.MGetUserSubmitRecordRequest, *args,
+                             **kwargs) -> crawl_service_pb2.MGetUserSubmitRecordResponse:
+        response = []
+        for r in request.get_user_submit_record_request:
+            try:
+                response.append(CrawlServiceImpl.GetUserSubmitRecord(r))
+            except Exception as e:
+                logging.exception(e)
+        return response
+
+    @staticmethod
+    def MGetRecentContest(request: crawl_service_pb2.MGetRecentContestRequest, *args,
+                          **kwargs) -> crawl_service_pb2.MGetRecentContestResponse:
+        response = []
+        for p in request.platform:
+            try:
+                response.append(CrawlServiceImpl.GetRecentContest(crawl_service_pb2.GetRecentContestRequest(
+                    platform=p)))
+            except Exception as e:
+                logging.exception(e)
+        return response

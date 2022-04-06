@@ -10,9 +10,11 @@ ENV GOODGUY=/home/goodguy
 ENV PYTHONPATH=$GOODGUY
 RUN mkdir $GOODGUY
 WORKDIR $GOODGUY
-COPY ./ $GOODGUY
+COPY ./requirements.txt $GOODGUY
 
-RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    && make protobuf
+RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+COPY ./ $GOODGUY
+RUN make protobuf
 
 CMD python3 crawl_service/server.py & envoy -c envoy.yaml
