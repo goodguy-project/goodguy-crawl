@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package crawl_service;
 
-option go_package = "./pb";
-
 message GetUserContestRecordRequest {
     string platform = 1;
     string handle = 2; // 用户名
