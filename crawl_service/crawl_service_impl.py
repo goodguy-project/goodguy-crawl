@@ -15,6 +15,7 @@ from crawl_service.crawler.luogu.get_luogu_submit_data import get_luogu_submit_d
 from crawl_service.crawler.nowcoder.get_nowcoder_contest_data import get_nowcoder_contest_data
 from crawl_service.crawler.nowcoder.get_nowcoder_recent_contest import get_nowcoder_recent_contest
 from crawl_service.crawler.vjudge.get_vjudge_submit_data import get_vjudge_submit_data
+from crawl_service.util.const import PLATFORM_RECENT_CONTEST
 
 
 class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
@@ -99,7 +100,9 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
                 response.append(CrawlServiceImpl.GetUserContestRecord(r))
             except Exception as e:
                 logging.exception(e)
-        return response
+        return crawl_service_pb2.MGetUserContestRecordResponse(
+            user_contest_record=response,
+        )
 
     @staticmethod
     def MGetUserSubmitRecord(request: crawl_service_pb2.MGetUserSubmitRecordRequest, *args,
@@ -110,16 +113,23 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
                 response.append(CrawlServiceImpl.GetUserSubmitRecord(r))
             except Exception as e:
                 logging.exception(e)
-        return response
+        return crawl_service_pb2.MGetUserSubmitRecordResponse(
+            user_submit_record=response,
+        )
 
     @staticmethod
     def MGetRecentContest(request: crawl_service_pb2.MGetRecentContestRequest, *args,
                           **kwargs) -> crawl_service_pb2.MGetRecentContestResponse:
         response = []
-        for p in request.platform:
+        pf = request.platform
+        if not pf:
+            pf = PLATFORM_RECENT_CONTEST
+        for p in pf:
             try:
                 response.append(CrawlServiceImpl.GetRecentContest(crawl_service_pb2.GetRecentContestRequest(
                     platform=p)))
             except Exception as e:
                 logging.exception(e)
-        return response
+        return crawl_service_pb2.MGetRecentContestResponse(
+            recent_contest=response,
+        )
