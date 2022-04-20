@@ -77,6 +77,23 @@ message MGetRecentContestResponse {
     repeated RecentContest recent_contest = 1;
 }
 
+message GetDailyQuestionRequest {
+    string platform = 1;
+    string date = 2; // 格式：YYYYMMDD 暂不支持
+}
+
+message GetDailyQuestionResponse {
+    message Problem {
+        string platform = 1;
+        string url = 2;
+        string id = 3;
+        string name = 4;
+        string difficulty = 5;
+        map<string, string> extra = 6;
+    }
+    repeated Problem problem = 1;
+}
+
 service CrawlService {
     rpc GetUserContestRecord (GetUserContestRecordRequest) returns (UserContestRecord);
     rpc GetUserSubmitRecord (GetUserSubmitRecordRequest) returns (UserSubmitRecord);
@@ -84,4 +101,6 @@ service CrawlService {
     rpc MGetUserContestRecord (MGetUserContestRecordRequest) returns (MGetUserContestRecordResponse);
     rpc MGetUserSubmitRecord (MGetUserSubmitRecordRequest) returns (MGetUserSubmitRecordResponse);
     rpc MGetRecentContest (MGetRecentContestRequest) returns (MGetRecentContestResponse);
+
+    rpc GetDailyQuestion (GetDailyQuestionRequest) returns (GetDailyQuestionResponse);
 }

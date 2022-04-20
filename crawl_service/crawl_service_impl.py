@@ -9,6 +9,7 @@ from crawl_service.crawler.codeforces.get_codeforces_contest_data import get_cod
 from crawl_service.crawler.codeforces.get_codeforces_recent_contest import get_codeforces_recent_contest
 from crawl_service.crawler.codeforces.get_codeforces_submit_data import get_codeforces_submit_data
 from crawl_service.crawler.leetcode.get_leetcode_contest_record import get_leetcode_contest_record
+from crawl_service.crawler.leetcode.get_leetcode_daily_question import get_leetcode_daily_question
 from crawl_service.crawler.leetcode.get_leetcode_recent_contest import get_leetcode_recent_contest
 from crawl_service.crawler.luogu.get_luogu_recent_contest import get_luogu_recent_contest
 from crawl_service.crawler.luogu.get_luogu_submit_data import get_luogu_submit_data
@@ -133,3 +134,11 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         return crawl_service_pb2.MGetRecentContestResponse(
             recent_contest=response,
         )
+
+    @staticmethod
+    def GetDailyQuestion(request: crawl_service_pb2.GetDailyQuestionRequest, *args,
+                         **kwargs) -> crawl_service_pb2.GetDailyQuestionResponse:
+        impl = {
+            'leetcode': get_leetcode_daily_question,
+        }
+        return impl[request.platform]()
