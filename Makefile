@@ -6,9 +6,9 @@ else
 	PYTHON_EXE+=python3
 endif
 
-# protoc version >= 3.20.0
+# .pyi need protoc version >= 3.20.0
 protobuf:
-	protoc --pyi_out=. ./crawl_service/crawl_service.proto
+	-protoc --pyi_out=. ./crawl_service/crawl_service.proto
 	${PYTHON_EXE} -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./crawl_service/crawl_service.proto
 
 build:
