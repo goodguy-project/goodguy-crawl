@@ -1,9 +1,11 @@
+import logging
 import re
 
 import requests
 
 from crawl_service.crawler.request_executor import RequestExecutorManage
 from crawl_service.crawler.uoj.md5 import md5
+from crawl_service.util.new_session import new_session
 
 
 def get_token(html: str) -> str:
@@ -18,9 +20,10 @@ def get_password_client_salt(html: str) -> str:
 
 def login(session: requests.Session, username: str, password: str, host='https://uoj.ac'):
     html = RequestExecutorManage.work('uoj', session.get, f'{host}/login').text
-    RequestExecutorManage.work('uoj', session.post, f'{host}/login', data={
+    resp = RequestExecutorManage.work('uoj', session.post, f'{host}/login', data={
         '_token': get_token(html),
         'login': '',
         'username': username,
-        'password': md5(password, get_password_client_salt(html)),
+        'password': md5.md5(password, get_password_client_salt(html)),
     })
+    logging.info(f'uoj login response: {resp.text}')
