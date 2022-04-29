@@ -6,3 +6,4 @@ grpcio-tools
 lxml
 protobuf
 PyYAML
+PyExecJS
