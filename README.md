@@ -13,7 +13,7 @@ A gRPC-Python service for real-time crawlers to obtain information.
 | [nowcoder](https://nowcoder.com)      | √              |               | √              |                |
 | [luogu](https://luogu.com.cn)         |                | √             | √              |                |
 | [vjudge](https://vjudge.net)          |                | √             |                |                |
-| [leetcode](https://leetcode-cn.com)   | √              |               | √              | √              |
+| [leetcode](https://leetcode.cn)   | √              |               | √              | √              |
 | [codechef](https://www.codechef.com/) |                |               | √              |                |
 
 ## How to use

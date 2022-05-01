@@ -21,13 +21,13 @@ def get_leetcode_contest_record(handle: str) -> dict:
                  "userContestScore(userSlug: $userSlug)\n  contestUnratedContests\n}\n",
     }).encode('utf-8')
     headers = {
-        "x-csrftoken": get_leetcode_csrf_token(session, f'https://leetcode-cn.com/u/{handle}/'),
+        "x-csrftoken": get_leetcode_csrf_token(session, f'https://leetcode.cn/u/{handle}/'),
         "x-definition-name": "userContestRanking,globalRatingRanking,userContestScore,contestUnratedContests",
         "x-operation-name": "userContest",
         "x-timezone": "Asia/Shanghai",
         "Content-Type": 'application/json',
     }
-    data = RequestExecutorManage.work('leetcode', session.post, 'https://leetcode-cn.com/graphql', data=data,
+    data = RequestExecutorManage.work('leetcode', session.post, 'https://leetcode.cn/graphql', data=data,
                                       headers=headers).json()["data"]
     rating_history = json.loads(data["userContestRanking"]["ratingHistory"])
     contest_history = {
@@ -40,13 +40,13 @@ def get_leetcode_contest_record(handle: str) -> dict:
         rating = rating_history[contest_history[r['title_slug']][0]]
         record.append({
             'name': contest_history[r['title_slug']][1],
-            'url': f"https://leetcode-cn.com/contest/{r['title_slug']}",
+            'url': f"https://leetcode.cn/contest/{r['title_slug']}",
             'timestamp': r["start_time"],
             'rating': 1500 if rating is None else int(rating),
         })
     rating = rating_history[-1]
     return {
-        'profile_url': f'https://leetcode-cn.com/u/{handle}/',
+        'profile_url': f'https://leetcode.cn/u/{handle}/',
         'rating': 1500 if rating is None else int(rating),
         'length': len(user_contest_score),
         'record': record,

@@ -19,16 +19,16 @@ def get_leetcode_recent_contest() -> dict:
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/79.0.3945.130 Safari/537.36",
-        "x-csrftoken": get_leetcode_csrf_token(session, 'https://leetcode-cn.com/contest/'),
-        "origin": 'https://leetcode-cn.com',
-        "referer": 'https://leetcode-cn.com/contest/',
+        "x-csrftoken": get_leetcode_csrf_token(session, 'https://leetcode.cn/contest/'),
+        "origin": 'https://leetcode.cn',
+        "referer": 'https://leetcode.cn/contest/',
         "Connection": 'keep-alive',
         "Content-Type": 'application/json',
     }
     result = RequestExecutorManage.work(
         'leetcode',
         session.post,
-        'https://leetcode-cn.com/graphql',
+        'https://leetcode.cn/graphql',
         data=data,
         headers=headers
     ).json()['data']['contestUpcomingContests']
@@ -37,7 +37,7 @@ def get_leetcode_recent_contest() -> dict:
         item = {
             "time": contest.get('startTime', 0),
             "name": contest.get('title', ''),
-            "url": f"https://leetcode-cn.com/contest/{contest.get('titleSlug', '')}",
+            "url": f"https://leetcode.cn/contest/{contest.get('titleSlug', '')}",
             "duration": contest.get('duration', 0),
         }
         ret.append(item)
