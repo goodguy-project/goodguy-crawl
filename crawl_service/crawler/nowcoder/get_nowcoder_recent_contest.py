@@ -31,7 +31,7 @@ def handle_element(element: etree._Element, is_official: bool) -> dict:
     return {
         "name": html.xpath('//a')[0].text,
         "time": start,
-        "url": 'https://nowcoder.com' + html.xpath('//a/@href')[0],
+        "url": 'https://ac.nowcoder.com' + html.xpath('//a/@href')[0],
         "ext_info": {
             "user": html.xpath('//li[@class="user-icon"]')[0].text,
             "type": 'official' if is_official else 'unofficial',
