@@ -1,12 +1,17 @@
+import datetime
 import json
+
+from cachetools.func import ttl_cache
 
 from crawl_service import crawl_service_pb2
 from crawl_service.crawler.leetcode.get_leetcode_csrf_token import get_leetcode_csrf_token
 from crawl_service.crawler.request_executor import RequestExecutorManage
 from crawl_service.util.new_session import new_session
 
+__all__ = ['get_leetcode_daily_question']
 
-def get_leetcode_daily_question() -> crawl_service_pb2.GetDailyQuestionResponse:
+
+def _get_leetcode_daily_question() -> crawl_service_pb2.GetDailyQuestionResponse:
     session = new_session()
     data = json.dumps({
         "query": "query questionOfToday{todayRecord{date question{questionId difficulty title "
@@ -42,6 +47,13 @@ def get_leetcode_daily_question() -> crawl_service_pb2.GetDailyQuestionResponse:
     return crawl_service_pb2.GetDailyQuestionResponse(
         problem=problem,
     )
+
+
+def get_leetcode_daily_question() -> crawl_service_pb2.GetDailyQuestionResponse:
+    @ttl_cache(ttl=7200)
+    def f(_: str):
+        return _get_leetcode_daily_question()
+    return f(datetime.datetime.now().strftime('%Y%m%d'))
 
 
 if __name__ == '__main__':

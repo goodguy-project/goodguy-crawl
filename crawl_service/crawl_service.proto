@@ -79,7 +79,6 @@ message MGetRecentContestResponse {
 
 message GetDailyQuestionRequest {
     string platform = 1;
-    string date = 2; // 格式：YYYYMMDD 暂不支持
 }
 
 message GetDailyQuestionResponse {
