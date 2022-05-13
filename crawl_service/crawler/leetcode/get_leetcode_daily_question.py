@@ -49,12 +49,16 @@ def _get_leetcode_daily_question() -> crawl_service_pb2.GetDailyQuestionResponse
     )
 
 
+@ttl_cache(ttl=7200)
+def _get_leetcode_daily_question_cache(_: str):
+    return _get_leetcode_daily_question()
+
+
 def get_leetcode_daily_question() -> crawl_service_pb2.GetDailyQuestionResponse:
-    @ttl_cache(ttl=7200)
-    def f(_: str):
-        return _get_leetcode_daily_question()
-    return f(datetime.datetime.now().strftime('%Y%m%d'))
+    return _get_leetcode_daily_question_cache(datetime.datetime.now().strftime('%Y%m%d'))
 
 
 if __name__ == '__main__':
+    print(get_leetcode_daily_question())
+    print(get_leetcode_daily_question())
     print(get_leetcode_daily_question())
