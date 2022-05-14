@@ -22,11 +22,15 @@ def get_atcoder_recent_contest() -> dict:
     ret = []
     for idx in range(length):
         start_time = datetime.datetime.strptime(start_times[idx].text, "%Y-%m-%d %H:%M:%S%z").timestamp()
+        try:
+            duration = get_atcoder_contest_duration("https://atcoder.jp" + urls[idx])
+        except TypeError:
+            duration = 0
         ret.append({
             "time": int(start_time),
             "name": contests[idx].text,
             "url": "https://atcoder.jp" + urls[idx],
-            "duration": get_atcoder_contest_duration("https://atcoder.jp" + urls[idx]),
+            "duration": duration,
         })
     return {
         "status": "OK",

@@ -19,4 +19,4 @@ def get_atcoder_contest_duration(abs_url: str) -> int:
 
 
 if __name__ == '__main__':
-    print(get_atcoder_contest_duration('https://atcoder.jp/contests/arc125'))
+    print(get_atcoder_contest_duration('https://atcoder.jp/contests/abc251'))
