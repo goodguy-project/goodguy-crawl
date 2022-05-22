@@ -5,6 +5,7 @@ from urllib.parse import unquote
 
 from cachetools.func import ttl_cache
 
+from crawl_service.crawl_service_pb2 import UserSubmitRecord, SubmitRecordData
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
@@ -30,30 +31,25 @@ def get_luogu_submit_msg(user_id: int) -> dict:
 
 
 @ttl_cache(ttl=7200)
-def get_luogu_submit_data(handle: str) -> dict:
+def get_luogu_submit_data(handle: str) -> UserSubmitRecord:
     logging.info(f'crawling luogu handle: {handle}')
-    res = {
-        'status': 'unknown error',
-        'handle': handle,
-        'accept_count': 0,
-        'sumbit_count': 0,
-        'profile_url': f"https://www.luogu.com.cn",
-        'distribution': dict(),
-    }
     user_id = get_luogu_userid(handle)
-    res['profile_url'] = f"https://www.luogu.com.cn/user/{user_id}"
     msg = get_luogu_submit_msg(user_id)
-    res['accept_count'] = msg["currentData"]["user"]["passedProblemCount"]
-    res['submit_count'] = msg["currentData"]["user"]["submittedProblemCount"]
-    distribution = res['distribution']
+    distribution = dict()
     accept_problem_set = set()
     for accept_problem in msg["currentData"]["passedProblems"]:
         if accept_problem["pid"] not in accept_problem_set:
             accept_problem_set.add(accept_problem["pid"])
             diff = accept_problem["difficulty"] * 100 + 100
             distribution[diff] = distribution.get(diff, 0) + 1
-    res['status'] = 'OK'
-    return res
+    return UserSubmitRecord(
+        profile_url=f"https://www.luogu.com.cn/user/{user_id}",
+        accept_count=msg["currentData"]["user"]["passedProblemCount"],
+        submit_count=msg["currentData"]["user"]["submittedProblemCount"],
+        distribution=distribution,
+        platform='luogu',
+        handle=handle,
+    )
 
 
 if __name__ == '__main__':

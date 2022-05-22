@@ -27,6 +27,61 @@ message GetUserSubmitRecordRequest {
     string handle = 2; // 用户名
 }
 
+enum Verdict {
+    Other = 0;
+    Accepted = 1;
+    WrongAnswer = 2;
+    RuntimeError = 3;
+    TimeLimitExceeded = 4;
+    MemoryLimitExceeded = 5;
+    CompilationError = 6;
+    PresentationError = 7;
+    IdlenessLimitExceeded = 8;
+    SecurityViolated = 9;
+    Crashed = 10;
+    InputPreparationCrashed = 11;
+    Partial = 12;
+    Challenged = 13;
+    Skipped = 14;
+    Testing = 15;
+    Rejected = 16;
+    OutputLimitExceeded = 17;
+}
+
+enum ProgrammingLanguage {
+    Unknown = 0;
+    Cpp = 1;
+    Java = 2;
+    Python = 3;
+    Golang = 4;
+    C = 5;
+    CSharp = 6;
+    Kotlin = 7;
+    JavaScript = 8;
+    TypeScript = 9;
+    Lua = 10;
+    ObjectiveC = 11;
+    Swift = 12;
+    Rust = 13;
+    Scala = 14;
+    Pascal = 15;
+    Haskell = 16;
+    Ruby = 17;
+    PHP = 18;
+    Erlang = 19;
+    Elixir = 20;
+    Racket = 21;
+}
+
+message SubmitRecordData {
+    string problem_name = 1; // 题目名
+    string problem_url = 2; // 题目链接
+    int64 submit_time = 3; // 提交时间戳 单位秒
+    Verdict verdict = 4; // 提交状态
+    int32 running_time = 5; // 代码运行时间 单位毫秒
+    ProgrammingLanguage programming_language = 6; // 提交语言
+}
+
 message UserSubmitRecord {
     string profile_url = 1; // 用户页面URL
     int32 accept_count = 2; // 用户总AC数
@@ -35,6 +90,7 @@ message UserSubmitRecord {
     map<string, int32> oj_distribution = 5; // OJ做题分布 只有vjudge有
     string platform = 6;
     string handle = 7;
+    repeated SubmitRecordData submit_record_data = 8;
 }
 
 message GetRecentContestRequest {

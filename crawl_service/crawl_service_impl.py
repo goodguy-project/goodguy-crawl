@@ -55,16 +55,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             'luogu': get_luogu_submit_data,
             'vjudge': get_vjudge_submit_data,
         }
-        ret = impl[request.platform](request.handle)
-        return crawl_service_pb2.UserSubmitRecord(
-            profile_url=ret.get('profile_url'),
-            accept_count=ret.get('accept_count'),
-            submit_count=ret.get('submit_count'),
-            distribution=ret.get('distribution'),
-            oj_distribution=ret.get('oj_distribution'),
-            platform=request.platform,
-            handle=request.handle,
-        )
+        return impl[request.platform](request.handle)
 
     @staticmethod
     def GetRecentContest(request: crawl_service_pb2.GetRecentContestRequest, *args,
