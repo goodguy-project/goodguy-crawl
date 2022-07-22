@@ -36,7 +36,13 @@ Linux: [Install docker command](https://command-not-found.com/docker)
 
 `make run`
 
-Then localhost:9851 is the address of goodguy-crawl. (grpc-web use localhost:9852)
+### Service list
+
+| port | service  |
+|------|----------|
+| 9851 | grpc     |
+| 9852 | grpc-web |
+| 9850 | http     |
 
 ### Check server is available
 

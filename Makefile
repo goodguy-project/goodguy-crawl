@@ -16,7 +16,7 @@ build:
 
 run:
 	-docker network create goodguy-net
-	docker run -p 9851:50051 -p 9852:9852 -dit --name="goodguy-crawl" --restart=always --network goodguy-net --network-alias goodguy-crawl goodguy-crawl
+	docker run -p 9851:50051 -p 9852:9852 -p 9850:50049 -dit --name="goodguy-crawl" --restart=always --network goodguy-net --network-alias goodguy-crawl goodguy-crawl
 
 clean:
 	-docker stop $$(docker ps -a -q --filter="name=goodguy-crawl")

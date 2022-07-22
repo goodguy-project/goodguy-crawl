@@ -1,6 +1,6 @@
 FROM envoyproxy/envoy:v1.20-latest
 
-FROM python:3.9.10-bullseye
+FROM python:3.10.5-bullseye
 
 COPY --from=0 /usr/local/bin/envoy /usr/local/bin
 
@@ -17,4 +17,4 @@ RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 COPY ./ $GOODGUY
 RUN make protobuf
 
-CMD python3 crawl_service/server.py & envoy -c envoy.yaml
+CMD python3 crawl_service/service.py & envoy -c envoy.yaml

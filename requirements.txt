@@ -7,3 +7,4 @@ lxml
 protobuf
 PyYAML
 js2py
+flask

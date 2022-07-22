@@ -156,6 +156,5 @@ service CrawlService {
     rpc MGetUserContestRecord (MGetUserContestRecordRequest) returns (MGetUserContestRecordResponse);
     rpc MGetUserSubmitRecord (MGetUserSubmitRecordRequest) returns (MGetUserSubmitRecordResponse);
     rpc MGetRecentContest (MGetRecentContestRequest) returns (MGetRecentContestResponse);
-
     rpc GetDailyQuestion (GetDailyQuestionRequest) returns (GetDailyQuestionResponse);
 }
