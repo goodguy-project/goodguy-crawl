@@ -1,7 +1,10 @@
 import logging
 import datetime
-from lxml import etree
+from urllib.parse import quote_plus
+
 from cachetools.func import ttl_cache
+from lxml import etree
+
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
 
@@ -15,10 +18,10 @@ def get_atcoder_contest_data(handle: str) -> dict:
         'record': [],
         'handle': handle,
         'rating': 0,
-        'profile_url': f"https://atcoder.jp/users/{handle}",
+        'profile_url': f"https://atcoder.jp/users/{quote_plus(handle)}",
         'length': 0,
     }
-    url = f'https://atcoder.jp/users/{handle}/history'
+    url = f'https://atcoder.jp/users/{quote_plus(handle)}/history'
     html = RequestExecutorManage.work('atcoder', session.get, url).text
     obj = etree.HTML(html)
     source = obj.xpath('//table[@id="history"]//tr[contains(@class, "text-center")]')

@@ -1,4 +1,5 @@
 import json
+from urllib.parse import quote_plus
 
 from cachetools.func import ttl_cache
 
@@ -21,7 +22,7 @@ def get_leetcode_contest_record(handle: str) -> dict:
                  "userContestScore(userSlug: $userSlug)\n  contestUnratedContests\n}\n",
     }).encode('utf-8')
     headers = {
-        "x-csrftoken": get_leetcode_csrf_token(session, f'https://leetcode.cn/u/{handle}/'),
+        "x-csrftoken": get_leetcode_csrf_token(session, f'https://leetcode.cn/u/{quote_plus(handle)}/'),
         "x-definition-name": "userContestRanking,globalRatingRanking,userContestScore,contestUnratedContests",
         "x-operation-name": "userContest",
         "x-timezone": "Asia/Shanghai",
@@ -46,7 +47,7 @@ def get_leetcode_contest_record(handle: str) -> dict:
         })
     rating = rating_history[-1]
     return {
-        'profile_url': f'https://leetcode.cn/u/{handle}/',
+        'profile_url': f'https://leetcode.cn/u/{quote_plus(handle)}/',
         'rating': 1500 if rating is None else int(rating),
         'length': len(user_contest_score),
         'record': record,

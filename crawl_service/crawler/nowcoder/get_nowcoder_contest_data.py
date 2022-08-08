@@ -1,6 +1,8 @@
 from typing import Union
 import logging
 import json
+from urllib.parse import quote_plus
+
 from cachetools.func import ttl_cache
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.request_executor import RequestExecutorManage
@@ -14,10 +16,10 @@ def get_nowcoder_contest_data(handle: Union[str, int]) -> dict:
         'record': [],
         'handle': handle,
         'rating': 0,
-        'profile_url': f"https://ac.nowcoder.com/acm/home/{handle}",
+        'profile_url': f"https://ac.nowcoder.com/acm/home/{quote_plus(str(handle))}",
         'length': 0,
     }
-    url = f'https://ac.nowcoder.com/acm/contest/rating-history?uid={handle}'
+    url = f'https://ac.nowcoder.com/acm/contest/rating-history?uid={quote_plus(str(handle))}'
     rsp = RequestExecutorManage.work('nowcoder', new_session().get, url)
     obj = json.loads(rsp.text)
     res['status'] = obj["msg"]

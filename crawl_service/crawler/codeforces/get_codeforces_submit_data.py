@@ -3,6 +3,7 @@ import json
 import re
 import traceback
 from typing import List
+from urllib.parse import quote_plus
 
 import requests
 from cachetools.func import ttl_cache
@@ -44,7 +45,7 @@ def get_codeforces_submit_data(handle: str) -> UserSubmitRecord:
     logging.info(f'crawling codeforces handle: {handle}')
     accept_count = 0
     response = RequestExecutorManage.work('codeforces', requests.get,
-                                          f"https://codeforces.com/api/user.status?handle={handle}").json()
+                                          f"https://codeforces.com/api/user.status?handle={quote_plus(handle)}").json()
     ac_problem_set = set()
     distribution = dict()
     submit_record_data: List[SubmitRecordData] = []
@@ -70,7 +71,7 @@ def get_codeforces_submit_data(handle: str) -> UserSubmitRecord:
                 distribution[problem_rating] = distribution.get(problem_rating, 0) + 1
             accept_count += 1
     return UserSubmitRecord(
-        profile_url=f"https://codeforces.com/profile/{handle}",
+        profile_url=f"https://codeforces.com/profile/{quote_plus(handle)}",
         accept_count=accept_count,
         submit_count=len(response['result']),
         distribution=distribution,
