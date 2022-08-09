@@ -9,7 +9,7 @@ def start_new_thread(func, *args, **kwargs):
     class MyThead(threading.Thread):
         def __init__(self):
             super().__init__()
-            self.setDaemon(False)
+            self.daemon = False
 
         def run(self) -> None:
             try:

@@ -2,6 +2,7 @@ import json
 from typing import Type, Callable
 
 from flask import Flask, request, abort
+from gevent import pywsgi
 from google.protobuf.json_format import Parse, MessageToJson
 
 from crawl_service.crawl_service_impl import CrawlServiceImpl
@@ -14,7 +15,7 @@ from crawl_service.crawl_service_pb2 import (
     MGetRecentContestRequest,
     GetDailyQuestionRequest,
 )
-from crawl_service.util.config import GLOBAL_CONFIG
+from crawl_service.util.config import Config
 
 APP = Flask(__name__)
 
@@ -56,9 +57,11 @@ def decorator(interface: Interface):
 def serve():
     for interface in INTERFACES:
         APP.route(f'/{interface.handler.__name__}', methods=['POST'])(decorator(interface))
-    host = GLOBAL_CONFIG.get("service.http.host", '0.0.0.0')
-    port = GLOBAL_CONFIG.get("service.http.port", 50049)
-    APP.run(host, port)
+    host = Config.get("service.http.host", '0.0.0.0')
+    port = Config.get("service.http.port", 50049)
+    server = pywsgi.WSGIServer((host, port), APP)
+    print('http crawl service is serving on 0.0.0.0:50049')
+    server.serve_forever()
 
 
 if __name__ == '__main__':

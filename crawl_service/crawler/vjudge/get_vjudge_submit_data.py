@@ -7,15 +7,15 @@ from crawl_service.util.const import VJUDGE_VERDICT_MAP, VJUDGE_PROGRAMMING_LANG
 from crawl_service.util.new_session import new_session
 from crawl_service.crawler.vjudge.login import login
 from crawl_service.crawler.request_executor import RequestExecutorManage
-from crawl_service.util.config import GLOBAL_CONFIG
+from crawl_service.util.config import Config
 
 
 @ttl_cache(ttl=7200)
 def get_vjudge_submit_data(handle: str) -> UserSubmitRecord:
     session = new_session()
-    if not login(session, GLOBAL_CONFIG.get("vjudge.username"), GLOBAL_CONFIG.get("vjudge.password")):
-        raise ValueError(f"login failed with username {GLOBAL_CONFIG.get('vjudge.username')} and "
-                         f"password {GLOBAL_CONFIG.get('vjudge.password')}")
+    if not login(session, Config.get("vjudge.username"), Config.get("vjudge.password")):
+        raise ValueError(f"login failed with username {Config.get('vjudge.username')} and "
+                         f"password {Config.get('vjudge.password')}")
     problem_set = set()
     max_id = ""
     accept_count = 0

@@ -9,7 +9,7 @@ class _Thread(threading.Thread):
         self.__args = args
         self.__kwargs = kwargs
         self.res = None
-        self.setDaemon(daemon)
+        self.daemon = daemon
         self.done = False
 
     def run(self) -> None:

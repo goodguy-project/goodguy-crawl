@@ -4,7 +4,7 @@ from copy import deepcopy
 from readerwriterlock.rwlock import RWLockFairD
 
 
-class Config(object):
+class _Config(object):
     def __init__(self, path: str):
         self.__lock = RWLockFairD()
         self.__conf = None
@@ -35,9 +35,10 @@ class Config(object):
             return deepcopy(ret)
 
 
-GLOBAL_CONFIG = Config(
+Config = _Config(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'config.yml'))
 
+__all__ = 'Config'
 
 if __name__ == '__main__':
-    print(GLOBAL_CONFIG.get("apple"))
+    print(Config.get("apple"))

@@ -16,11 +16,13 @@ from crawl_service.crawler.luogu.get_luogu_submit_data import get_luogu_submit_d
 from crawl_service.crawler.nowcoder.get_nowcoder_contest_data import get_nowcoder_contest_data
 from crawl_service.crawler.nowcoder.get_nowcoder_recent_contest import get_nowcoder_recent_contest
 from crawl_service.crawler.vjudge.get_vjudge_submit_data import get_vjudge_submit_data
+from crawl_service.util.catcher import catcher
 from crawl_service.util.const import PLATFORM_RECENT_CONTEST
 
 
 class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
     @staticmethod
+    @catcher
     def GetUserContestRecord(request: crawl_service_pb2.GetUserContestRecordRequest, *args,
                              **kwargs) -> crawl_service_pb2.UserContestRecord:
         impl = {
@@ -48,6 +50,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         )
 
     @staticmethod
+    @catcher
     def GetUserSubmitRecord(request: crawl_service_pb2.GetUserSubmitRecordRequest, *args,
                             **kwargs) -> crawl_service_pb2.UserSubmitRecord:
         impl = {
@@ -58,6 +61,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         return impl[request.platform](request.handle)
 
     @staticmethod
+    @catcher
     def GetRecentContest(request: crawl_service_pb2.GetRecentContestRequest, *args,
                          **kwargs) -> crawl_service_pb2.RecentContest:
         impl = {
@@ -84,6 +88,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         )
 
     @staticmethod
+    @catcher
     def MGetUserContestRecord(request: crawl_service_pb2.MGetUserContestRecordRequest, *args,
                               **kwargs) -> crawl_service_pb2.MGetUserContestRecordResponse:
         response = []
@@ -97,6 +102,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         )
 
     @staticmethod
+    @catcher
     def MGetUserSubmitRecord(request: crawl_service_pb2.MGetUserSubmitRecordRequest, *args,
                              **kwargs) -> crawl_service_pb2.MGetUserSubmitRecordResponse:
         response = []
@@ -110,6 +116,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         )
 
     @staticmethod
+    @catcher
     def MGetRecentContest(request: crawl_service_pb2.MGetRecentContestRequest, *args,
                           **kwargs) -> crawl_service_pb2.MGetRecentContestResponse:
         response = []
@@ -127,6 +134,7 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
         )
 
     @staticmethod
+    @catcher
     def GetDailyQuestion(request: crawl_service_pb2.GetDailyQuestionRequest, *args,
                          **kwargs) -> crawl_service_pb2.GetDailyQuestionResponse:
         impl = {
