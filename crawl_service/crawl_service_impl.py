@@ -2,6 +2,7 @@ import logging
 
 from crawl_service import crawl_service_pb2
 from crawl_service import crawl_service_pb2_grpc
+from crawl_service.crawler.acwing.get_acwing_recent_contest import get_acwing_recent_contest
 from crawl_service.crawler.atcoder.get_atcoder_contest_data import get_atcoder_contest_data
 from crawl_service.crawler.atcoder.get_atcoder_recent_contest import get_atcoder_recent_contest
 from crawl_service.crawler.codechef.get_codechef_recent_contest import get_codechef_recent_contest
@@ -71,8 +72,11 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             'nowcoder': get_nowcoder_recent_contest,
             'luogu': get_luogu_recent_contest,
             'codechef': get_codechef_recent_contest,
+            'acwing': get_acwing_recent_contest,
         }
         ret = impl[request.platform]()
+        if isinstance(ret, crawl_service_pb2.RecentContest):
+            return ret
         recent_contest = []
         for data in ret.get("data", []):
             recent_contest.append(crawl_service_pb2.RecentContest.ContestMessage(
