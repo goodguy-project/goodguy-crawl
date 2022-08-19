@@ -12,6 +12,7 @@ PLATFORM_RECENT_CONTEST = [
     'luogu',
     'nowcoder',
     'codechef',
+    'acwing',
 ]
 
 PLATFORM_ALL = [
@@ -22,6 +23,7 @@ PLATFORM_ALL = [
     'nowcoder',
     'vjudge',
     'codechef',
+    'acwing',
 ]
 
 VJUDGE_VERDICT_MAP = {
