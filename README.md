@@ -15,6 +15,7 @@ A gRPC-Python service for real-time crawlers to obtain information.
 | [vjudge](https://vjudge.net)          |                | √             |                |                |
 | [leetcode](https://leetcode.cn)       | √              |               | √              | √              |
 | [codechef](https://www.codechef.com/) |                |               | √              |                |
+| [acwing](https://www.acwing.com/)     |                |               | √              |                |
 
 ## How to use
 
