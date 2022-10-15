@@ -9,4 +9,5 @@ def catcher(f):
             logging.exception(e)
             raise RuntimeError('internal error')
 
+    wrapper.__name__ = f.__name__
     return wrapper

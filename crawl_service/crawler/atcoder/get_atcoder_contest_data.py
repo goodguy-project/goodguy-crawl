@@ -34,7 +34,7 @@ def get_atcoder_contest_data(handle: str) -> dict:
             continue
         record.append({
             'timestamp': int(datetime.datetime.strptime(table.xpath('//td[1]/@data-order')[0],
-                                               '%Y/%m/%d %H:%M:%S').timestamp()),
+                                                        '%Y/%m/%d %H:%M:%S').timestamp()),
             'name': table.xpath('//td[2]/a[1]')[0].text,
             'url': "https://atcoder.jp" + table.xpath('//td[2]/a[1]/@href')[0],
             'rating': int(table.xpath('//td[5]/span')[0].text),
