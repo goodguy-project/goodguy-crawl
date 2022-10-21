@@ -1,42 +1,15 @@
 import json
-from typing import Type, Callable
 
 from flask import Flask, request, abort
 from gevent import pywsgi
 from google.protobuf.json_format import Parse, MessageToJson
 
-from crawl_service.crawl_service_impl import CrawlServiceImpl
-from crawl_service.crawl_service_pb2 import (
-    GetUserContestRecordRequest,
-    GetUserSubmitRecordRequest,
-    GetRecentContestRequest,
-    MGetUserContestRecordRequest,
-    MGetUserSubmitRecordRequest,
-    MGetRecentContestRequest,
-    GetDailyQuestionRequest,
-)
+from crawl_service.crawl_service_impl import Interface, INTERFACES
 from crawl_service.util.config import Config
 
 APP = Flask(__name__)
 
 __all__ = ['serve']
-
-
-class Interface(object):
-    def __init__(self, handler: Callable, message_type: Type):
-        self.handler = handler
-        self.message_type = message_type
-
-
-INTERFACES = [
-    Interface(CrawlServiceImpl.GetUserContestRecord, GetUserContestRecordRequest),
-    Interface(CrawlServiceImpl.GetUserSubmitRecord, GetUserSubmitRecordRequest),
-    Interface(CrawlServiceImpl.GetRecentContest, GetRecentContestRequest),
-    Interface(CrawlServiceImpl.MGetUserContestRecord, MGetUserContestRecordRequest),
-    Interface(CrawlServiceImpl.MGetUserSubmitRecord, MGetUserSubmitRecordRequest),
-    Interface(CrawlServiceImpl.MGetRecentContest, MGetRecentContestRequest),
-    Interface(CrawlServiceImpl.GetDailyQuestion, GetDailyQuestionRequest),
-]
 
 
 def decorator(interface: Interface):

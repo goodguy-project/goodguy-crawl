@@ -1,7 +1,17 @@
 import logging
+from typing import Type, Callable
 
 from crawl_service import crawl_service_pb2
 from crawl_service import crawl_service_pb2_grpc
+from crawl_service.crawl_service_pb2 import (
+    GetUserContestRecordRequest,
+    GetUserSubmitRecordRequest,
+    GetRecentContestRequest,
+    MGetUserContestRecordRequest,
+    MGetUserSubmitRecordRequest,
+    MGetRecentContestRequest,
+    GetDailyQuestionRequest,
+)
 from crawl_service.crawler.acwing.get_acwing_recent_contest import get_acwing_recent_contest
 from crawl_service.crawler.atcoder.get_atcoder_contest_data import get_atcoder_contest_data
 from crawl_service.crawler.atcoder.get_atcoder_recent_contest import get_atcoder_recent_contest
@@ -145,3 +155,20 @@ class CrawlServiceImpl(crawl_service_pb2_grpc.CrawlService):
             'leetcode': get_leetcode_daily_question,
         }
         return impl[request.platform]()
+
+
+class Interface(object):
+    def __init__(self, handler: Callable, message_type: Type):
+        self.handler = handler
+        self.message_type = message_type
+
+
+INTERFACES = [
+    Interface(CrawlServiceImpl.GetUserContestRecord, GetUserContestRecordRequest),
+    Interface(CrawlServiceImpl.GetUserSubmitRecord, GetUserSubmitRecordRequest),
+    Interface(CrawlServiceImpl.GetRecentContest, GetRecentContestRequest),
+    Interface(CrawlServiceImpl.MGetUserContestRecord, MGetUserContestRecordRequest),
+    Interface(CrawlServiceImpl.MGetUserSubmitRecord, MGetUserSubmitRecordRequest),
+    Interface(CrawlServiceImpl.MGetRecentContest, MGetRecentContestRequest),
+    Interface(CrawlServiceImpl.GetDailyQuestion, GetDailyQuestionRequest),
+]
