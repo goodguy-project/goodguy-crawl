@@ -6,18 +6,24 @@ from readerwriterlock.rwlock import RWLockFairD
 
 class _Config(object):
     def __init__(self, path: str):
+        self.__ready = False
         self.__lock = RWLockFairD()
         self.__conf = None
         self.__path = path
         self.reload_config(path)
 
     def reload_config(self, path: str) -> None:
+        if not os.path.exists(path):
+            return
         with open(path, 'r', encoding='utf-8') as config_file:
             conf = yaml.load(config_file.read(), yaml.FullLoader)
         with self.__lock.gen_wlock():
             self.__conf = conf
+        self.__ready = True
 
     def get(self, path: str, default=None):
+        if not self.__ready:
+            return default
         args = path.split('.')
         with self.__lock.gen_rlock():
             ret = self.__conf
