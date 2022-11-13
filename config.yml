@@ -1,7 +1,0 @@
-vjudge:
-  username: ~
-  password: ~
-  timeout: 300
-
-default:
-  timeout: 60

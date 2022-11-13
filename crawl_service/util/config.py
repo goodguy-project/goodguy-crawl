@@ -1,7 +1,10 @@
 import os
 import yaml
 from copy import deepcopy
+
 from readerwriterlock.rwlock import RWLockFairD
+
+from crawl_service.util.const import ROOT
 
 
 class _Config(object):
@@ -41,8 +44,7 @@ class _Config(object):
             return deepcopy(ret)
 
 
-Config = _Config(
-    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'config.yml'))
+Config = _Config(os.path.join(ROOT, 'config.yaml'))
 
 __all__ = 'Config'
 

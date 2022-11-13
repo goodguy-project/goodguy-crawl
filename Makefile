@@ -31,3 +31,7 @@ deploy:
 restart:
 	make clean
 	make deploy
+
+pack:
+	pyinstaller -F -n goodguy-crawl crawl_service/service.py
+	pyinstaller -F -n goodguy-crawl-no-service crawl_service/no_service.py

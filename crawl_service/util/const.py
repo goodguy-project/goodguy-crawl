@@ -3,7 +3,8 @@ from os.path import dirname
 
 from crawl_service import crawl_service_pb2
 
-ROOT = dirname(dirname(dirname(os.path.abspath(__file__))))
+# ROOT = dirname(dirname(dirname(os.path.abspath(__file__))))
+ROOT = os.getcwd()
 
 PLATFORM_RECENT_CONTEST = [
     'atcoder',
