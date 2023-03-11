@@ -1,0 +1,12 @@
+services:
+  goodguy-crawl:
+    build: .
+    ports:
+      - "9850:9850"
+      - "9851:9851"
+      - "9852:9852"
+    environment:
+      GOODGUY_CRAWL_HTTP_SERVICE: 1
+      GOODGUY_CRAWL_GRPC_SERVICE: 1
+      VJUDGE_USERNAME: ""
+      VJUDGE_PASSWORD: ""

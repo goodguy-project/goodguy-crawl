@@ -1,8 +1,8 @@
+This is goodguy-crawl version v2.0.0 alpha 1 (using golang instead of python)
+
 # CrawlService
 
-一个实时爬虫获取信息的gRPC-Python服务。
-
-A gRPC-Python service for real-time crawlers to obtain information.
+A service for real-time crawlers to obtain information.
 
 ## Features
 
@@ -19,34 +19,24 @@ A gRPC-Python service for real-time crawlers to obtain information.
 
 ## How to use
 
-### Install Make tool
+### Service Mode
 
-### Install docker
+- Install docker
 
-Windows/Mac: [Docker Desktop](https://www.docker.com/get-started)
+- Config `docker-compose.yml`
 
-Linux: [Install docker command](https://command-not-found.com/docker)
+- Build and Run service
 
-### Config config.yml (optional)
+`docker-compose up -d`
 
-### Build docker image
-
-`make build`
-
-### Run docker
-
-`make run`
-
-### Service list
+- Service list
 
 | port | service  |
 |------|----------|
+| 9850 | http     |
 | 9851 | grpc     |
 | 9852 | grpc-web |
-| 9850 | http     |
 
-### Check server is available
+### Go SDK Mode
 
-Open file `./client demo/fe/index.html`
-
-The deployment is successful when an "It works!" appears on the web page.
+`go get github.com/goodguy-project/goodguy-crawl`

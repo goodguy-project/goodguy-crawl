@@ -1,20 +1,12 @@
 FROM envoyproxy/envoy:v1.20-latest
 
-FROM python:3.10.5-bullseye
+FROM golang:1.20-bullseye
 
 COPY --from=0 /usr/local/bin/envoy /usr/local/bin
 
-RUN python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+WORKDIR /home
+COPY ./ /home
+RUN go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+RUN go build -o goodguy-crawl
 
-ENV GOODGUY=/home/goodguy
-ENV PYTHONPATH=$GOODGUY
-RUN mkdir $GOODGUY
-WORKDIR $GOODGUY
-COPY ./requirements.txt $GOODGUY
-
-RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-
-COPY ./ $GOODGUY
-RUN make protobuf
-
-CMD python3 crawl_service/service.py & envoy -c envoy.yaml
+CMD ./goodguy-crawl & envoy -c envoy.yaml
