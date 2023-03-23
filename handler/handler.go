@@ -14,7 +14,7 @@ import (
 	"github.com/goodguy-project/goodguy-crawl/crawl/nowcoder"
 	"github.com/goodguy-project/goodguy-crawl/crawl/vjudge"
 	"github.com/goodguy-project/goodguy-crawl/proto"
-	"github.com/goodguy-project/goodguy-crawl/util/cache"
+	"github.com/goodguy-project/goodguy-crawl/util/cachex"
 	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 )
 
@@ -27,27 +27,27 @@ type (
 
 var (
 	getContestRecordMap = map[string]getContestRecordFunction{
-		"codeforces": cache.TTLWrap(codeforces.GetContestRecord, cache.TTLConfig{TTL: 7200}),
-		"atcoder":    cache.TTLWrap(atcoder.GetContestRecord, cache.TTLConfig{TTL: 7200}),
-		"nowcoder":   cache.TTLWrap(nowcoder.GetContestRecord, cache.TTLConfig{TTL: 7200}),
-		"leetcode":   cache.TTLWrap(leetcode.GetContestRecord, cache.TTLConfig{TTL: 7200}),
+		"codeforces": cachex.TTLWrap(codeforces.GetContestRecord, cachex.TTLConfig{TTL: 7200}),
+		"atcoder":    cachex.TTLWrap(atcoder.GetContestRecord, cachex.TTLConfig{TTL: 7200}),
+		"nowcoder":   cachex.TTLWrap(nowcoder.GetContestRecord, cachex.TTLConfig{TTL: 7200}),
+		"leetcode":   cachex.TTLWrap(leetcode.GetContestRecord, cachex.TTLConfig{TTL: 7200}),
 	}
 	getSubmitRecordMap = map[string]getSubmitRecordFunction{
-		"codeforces": cache.TTLWrap(codeforces.GetSubmitRecord, cache.TTLConfig{TTL: 7200}),
-		"luogu":      cache.TTLWrap(luogu.GetSubmitRecord, cache.TTLConfig{TTL: 7200}),
-		"vjudge":     cache.TTLWrap(vjudge.GetSubmitRecord, cache.TTLConfig{TTL: 7200}),
+		"codeforces": cachex.TTLWrap(codeforces.GetSubmitRecord, cachex.TTLConfig{TTL: 7200}),
+		"luogu":      cachex.TTLWrap(luogu.GetSubmitRecord, cachex.TTLConfig{TTL: 7200}),
+		"vjudge":     cachex.TTLWrap(vjudge.GetSubmitRecord, cachex.TTLConfig{TTL: 7200}),
 	}
 	getRecentContestMap = map[string]getRecentContestFunction{
-		"codeforces": cache.TTLWrap(codeforces.GetRecentContest, cache.TTLConfig{TTL: 7200}),
-		"atcoder":    cache.TTLWrap(atcoder.GetRecentContest, cache.TTLConfig{TTL: 7200}),
-		"nowcoder":   cache.TTLWrap(nowcoder.GetRecentContest, cache.TTLConfig{TTL: 7200}),
-		"luogu":      cache.TTLWrap(luogu.GetRecentContest, cache.TTLConfig{TTL: 7200}),
-		"leetcode":   cache.TTLWrap(leetcode.GetRecentContest, cache.TTLConfig{TTL: 7200}),
-		"codechef":   cache.TTLWrap(codechef.GetRecentContest, cache.TTLConfig{TTL: 7200}),
-		"acwing":     cache.TTLWrap(acwing.GetRecentContest, cache.TTLConfig{TTL: 7200}),
+		"codeforces": cachex.TTLWrap(codeforces.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
+		"atcoder":    cachex.TTLWrap(atcoder.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
+		"nowcoder":   cachex.TTLWrap(nowcoder.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
+		"luogu":      cachex.TTLWrap(luogu.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
+		"leetcode":   cachex.TTLWrap(leetcode.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
+		"codechef":   cachex.TTLWrap(codechef.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
+		"acwing":     cachex.TTLWrap(acwing.GetRecentContest, cachex.TTLConfig{TTL: 7200}),
 	}
 	getDailyQuestionMap = map[string]getDailyQuestionFunction{
-		"leetcode": cache.TTLWrap(leetcode.GetDailyQuestion, cache.TTLConfig{TTL: 7200}),
+		"leetcode": cachex.TTLWrap(leetcode.GetDailyQuestion, cachex.TTLConfig{TTL: 7200}),
 	}
 )
 

@@ -1,4 +1,4 @@
-package cache
+package cachex
 
 import (
 	"container/list"
@@ -37,7 +37,7 @@ func TTLWrap[Function any](function Function, config TTLConfig) Function {
 	ttlQueue := list.New()
 	lock := sync.RWMutex{}
 	return reflect.MakeFunc(typeOf, func(input []reflect.Value) []reflect.Value {
-		h := hash(input...)
+		h := Hash(input...)
 		find := func() (bool, []reflect.Value) {
 			if v, ok := hashMap[h]; ok {
 				if time.Now().Before(v.Time.Add(config.TTL)) {

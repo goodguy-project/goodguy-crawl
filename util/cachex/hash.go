@@ -1,4 +1,4 @@
-package cache
+package cachex
 
 import (
 	"os"
@@ -130,7 +130,7 @@ func hashRecursion(x reflect.Value) uint64 {
 	}
 }
 
-func hash(x ...reflect.Value) uint64 {
+func Hash(x ...reflect.Value) uint64 {
 	r := defaultSliceHash
 	for _, y := range x {
 		r = splitmix64(r + hashRecursion(y))
