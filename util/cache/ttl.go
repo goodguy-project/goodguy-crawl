@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"sync"
 	"time"
+
+	"google.golang.org/protobuf/proto"
 )
 
 type ttlValue struct {
@@ -41,7 +43,20 @@ func TTLWrap[Function any](function Function, config TTLConfig) Function {
 				if time.Now().Before(v.Time.Add(config.TTL)) {
 					ok := true
 					for i, cachedInput := range v.Input {
-						if !reflect.DeepEqual(input[i].Interface(), cachedInput.Interface()) {
+						x, y := input[i].Interface(), cachedInput.Interface()
+						// check deep equal for proto message
+						if x, o := x.(proto.Message); o {
+							if y, o := y.(proto.Message); o {
+								if proto.Equal(x, y) {
+									continue
+								} else {
+									ok = false
+									break
+								}
+							}
+						}
+						// check deep equal for others
+						if !reflect.DeepEqual(x, y) {
 							ok = false
 							break
 						}

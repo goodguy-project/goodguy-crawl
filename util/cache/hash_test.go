@@ -41,18 +41,24 @@ func TestHash(t *testing.T) {
 	t.Run("proto", func(t *testing.T) {
 		a := &proto.GetRecentContestResponse{}
 		a.Reset()
+		a.Platform = "1"
 		a.RecentContest = []*proto.GetRecentContestResponse_Contest{
 			{Name: "1"},
 			{Name: "2"},
 		}
-		b := &proto.GetRecentContestResponse{RecentContest: []*proto.GetRecentContestResponse_Contest{
+		b := &proto.GetRecentContestResponse{}
+		b.Reset()
+		b.Platform = "1"
+		b.RecentContest = []*proto.GetRecentContestResponse_Contest{
 			{Name: "1"},
 			{Name: "2"},
-		}}
-		c := &proto.GetRecentContestResponse{RecentContest: []*proto.GetRecentContestResponse_Contest{
-			{Name: "2"},
-			{Name: "2"},
-		}}
+		}
+		c := &proto.GetRecentContestResponse{
+			Platform: "1",
+			RecentContest: []*proto.GetRecentContestResponse_Contest{
+				{Name: "2"},
+				{Name: "2"},
+			}}
 		if hash(reflect.ValueOf(a)) != hash(reflect.ValueOf(b)) {
 			t.Error("proto hash failed")
 			return
