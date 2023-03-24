@@ -7,11 +7,12 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 
+	"github.com/samber/lo"
+
 	"github.com/goodguy-project/goodguy-crawl/proto"
 	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 	"github.com/goodguy-project/goodguy-crawl/util/httpx"
 	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
-	"github.com/samber/lo"
 )
 
 func GetContestRecord(req *proto.GetContestRecordRequest) (*proto.GetContestRecordResponse, error) {

@@ -5,13 +5,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
-
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
-
 	"github.com/samber/lo"
 
 	"github.com/goodguy-project/goodguy-crawl/proto"
+	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 	"github.com/goodguy-project/goodguy-crawl/util/httpx"
 )
 
@@ -44,7 +41,6 @@ func GetRecentContest(_ *proto.GetRecentContestRequest) (*proto.GetRecentContest
 		return nil, errorx.New(err)
 	}
 	resp, _, err := httpx.SendRequest[*Response]("codeforces", nil, req)
-	fmt.Println(jsonx.MarshalString(resp))
 	if err != nil {
 		return nil, errorx.New(err)
 	}

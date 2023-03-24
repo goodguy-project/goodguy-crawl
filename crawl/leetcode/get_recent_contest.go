@@ -6,11 +6,12 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 
+	"github.com/samber/lo"
+
 	"github.com/goodguy-project/goodguy-crawl/proto"
 	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 	"github.com/goodguy-project/goodguy-crawl/util/httpx"
 	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
-	"github.com/samber/lo"
 )
 
 func GetRecentContest(_ *proto.GetRecentContestRequest) (*proto.GetRecentContestResponse, error) {

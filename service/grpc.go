@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"net"
 
+	"google.golang.org/grpc"
+
 	"github.com/goodguy-project/goodguy-crawl/handler"
 	"github.com/goodguy-project/goodguy-crawl/proto"
-	"google.golang.org/grpc"
 )
 
 type GrpcServer struct {

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/antchfx/htmlquery"
+
 	"github.com/goodguy-project/goodguy-crawl/proto"
 	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 	"github.com/goodguy-project/goodguy-crawl/util/httpx"

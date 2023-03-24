@@ -9,10 +9,11 @@ import (
 	"time"
 
 	"github.com/antchfx/htmlquery"
+	"golang.org/x/net/html"
+
 	"github.com/goodguy-project/goodguy-crawl/proto"
 	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 	"github.com/goodguy-project/goodguy-crawl/util/httpx"
-	"golang.org/x/net/html"
 )
 
 var (

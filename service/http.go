@@ -4,12 +4,11 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/samber/lo"
 
 	"github.com/goodguy-project/goodguy-crawl/handler"
 	"github.com/goodguy-project/goodguy-crawl/proto"
-
-	"github.com/gin-gonic/gin"
 	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
 )
 

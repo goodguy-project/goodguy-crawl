@@ -8,11 +8,10 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
-
 	mapset "github.com/deckarep/golang-set/v2"
 
 	"github.com/goodguy-project/goodguy-crawl/proto"
+	"github.com/goodguy-project/goodguy-crawl/util/errorx"
 	"github.com/goodguy-project/goodguy-crawl/util/httpx"
 )
 
