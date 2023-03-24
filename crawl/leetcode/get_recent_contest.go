@@ -15,6 +15,7 @@ import (
 )
 
 func GetRecentContest(_ *proto.GetRecentContestRequest) (*proto.GetRecentContestResponse, error) {
+	fmt.Println(1)
 	jar, err := cookiejar.New(nil)
 	if err != nil {
 		return nil, errorx.New(err)
