@@ -75,13 +75,13 @@ func TTLWrap[Function any](function Function, config TTLConfig) Function {
 		}(); ok {
 			return op
 		}
-		callTime := time.Now()
-		output := valueOf.Call(input)
 		lock.Lock()
 		defer lock.Unlock()
 		if ok, op := find(); ok {
 			return op
 		}
+		callTime := time.Now()
+		output := valueOf.Call(input)
 		v := &ttlValue{
 			Hash:   h,
 			Time:   callTime,
