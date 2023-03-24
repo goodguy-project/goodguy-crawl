@@ -4,8 +4,9 @@ go 1.20
 
 require (
 	github.com/antchfx/htmlquery v1.3.0
-	github.com/bytedance/sonic v1.8.3
+	github.com/bytedance/sonic v1.8.6
 	github.com/deckarep/golang-set/v2 v2.2.0
+	github.com/gin-gonic/gin v1.9.0
 	github.com/samber/lo v1.37.0
 	github.com/tidwall/gjson v1.14.4
 	golang.org/x/net v0.7.0
@@ -18,7 +19,6 @@ require (
 	github.com/antchfx/xpath v1.2.3 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.9.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.11.2 // indirect
