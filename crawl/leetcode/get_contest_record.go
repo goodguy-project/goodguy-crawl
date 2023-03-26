@@ -56,12 +56,15 @@ func GetContestRecord(req *proto.GetContestRecordRequest) (*proto.GetContestReco
 		Data *Data `json:"data"`
 	}
 	response, _, err := httpx.SendRequest[*Response]("leetcode", client, request)
-	if err != nil {
+	if response == nil || err != nil {
 		return nil, errorx.New(err)
 	}
 	type ContestTitle struct {
 		Title     string `json:"title"`
 		TitleSlug string `json:"title_slug"`
+	}
+	if response.Data == nil || response.Data.UserContestRanking == nil {
+		return nil, errorx.New(nil)
 	}
 	contestTitle, err := jsonx.Unmarshal[[]*ContestTitle](response.Data.UserContestRanking.ContestHistory)
 	if err != nil {
