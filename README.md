@@ -1,5 +1,3 @@
-This is goodguy-crawl version v2.0.0 alpha 1 (using golang instead of python)
-
 # CrawlService
 
 A service for real-time crawlers to obtain information.
