@@ -80,7 +80,7 @@ func GetRecentContest(_ *proto.GetRecentContestRequest) (*proto.GetRecentContest
 		if len(tsNode) <= 1 {
 			return nil, errors.New("acwing get contest time failed")
 		}
-		ts, err := time.Parse("2006-01-02 15:04:05", htmlquery.OutputHTML(tsNode[1], false))
+		ts, err := time.ParseInLocation("2006-01-02 15:04:05", htmlquery.OutputHTML(tsNode[1], false), location)
 		if err != nil {
 			return nil, errorx.New(err)
 		}

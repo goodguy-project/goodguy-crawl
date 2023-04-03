@@ -40,7 +40,7 @@ func getContest(node *html.Node, isOfficial bool) (*proto.GetRecentContestRespon
 	const layout = "2006-01-02 15:04"
 	const length = len(layout)
 	getTimeStampFromStr := func(s string) (int64, error) {
-		ts, err := time.Parse(layout, s)
+		ts, err := time.ParseInLocation(layout, s, location)
 		if err != nil {
 			return 0, err
 		}
