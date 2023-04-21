@@ -3,7 +3,7 @@ package codeforces
 import (
 	"testing"
 
-	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/jsonx"
 )
 
 func TestGetRecentContest(t *testing.T) {

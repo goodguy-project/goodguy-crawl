@@ -4,7 +4,7 @@ import (
 	"github.com/antchfx/htmlquery"
 	"golang.org/x/net/html"
 
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/errorx"
 )
 
 func GetNodeString(node *html.Node, xpath string) (string, error) {

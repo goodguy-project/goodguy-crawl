@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/goodguy-project/goodguy-crawl/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
 )
 
 func TestHash(t *testing.T) {

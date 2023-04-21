@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goodguy-project/goodguy-crawl/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
 )
 
 func TestTTLWrap(t *testing.T) {

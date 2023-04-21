@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
-	"github.com/goodguy-project/goodguy-crawl/util/httpx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/errorx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/httpx"
 )
 
 func login(username, password string) (*http.Client, error) {

@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/samber/lo"
 
-	"github.com/goodguy-project/goodguy-crawl/handler"
-	"github.com/goodguy-project/goodguy-crawl/proto"
-	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
+	"github.com/goodguy-project/goodguy-crawl/v2/handler"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/jsonx"
 )
 
 func getRequestFromGin[T any](c *gin.Context) (T, error) {

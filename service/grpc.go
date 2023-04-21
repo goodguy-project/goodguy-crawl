@@ -7,8 +7,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/goodguy-project/goodguy-crawl/handler"
-	"github.com/goodguy-project/goodguy-crawl/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/handler"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
 )
 
 type GrpcServer struct {

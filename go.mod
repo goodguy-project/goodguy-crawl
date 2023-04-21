@@ -1,4 +1,4 @@
-module github.com/goodguy-project/goodguy-crawl
+module github.com/goodguy-project/goodguy-crawl/v2
 
 go 1.20
 

@@ -3,8 +3,8 @@ package leetcode
 import (
 	"testing"
 
-	"github.com/goodguy-project/goodguy-crawl/proto"
-	"github.com/goodguy-project/goodguy-crawl/util/jsonx"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/jsonx"
 )
 
 func TestGetContestRecord(t *testing.T) {

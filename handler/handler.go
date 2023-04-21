@@ -6,17 +6,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/goodguy-project/goodguy-crawl/crawl/acwing"
-	"github.com/goodguy-project/goodguy-crawl/crawl/atcoder"
-	"github.com/goodguy-project/goodguy-crawl/crawl/codechef"
-	"github.com/goodguy-project/goodguy-crawl/crawl/codeforces"
-	"github.com/goodguy-project/goodguy-crawl/crawl/leetcode"
-	"github.com/goodguy-project/goodguy-crawl/crawl/luogu"
-	"github.com/goodguy-project/goodguy-crawl/crawl/nowcoder"
-	"github.com/goodguy-project/goodguy-crawl/crawl/vjudge"
-	"github.com/goodguy-project/goodguy-crawl/proto"
-	"github.com/goodguy-project/goodguy-crawl/util/cachex"
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/acwing"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/atcoder"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/codechef"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/codeforces"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/leetcode"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/luogu"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/nowcoder"
+	"github.com/goodguy-project/goodguy-crawl/v2/crawl/vjudge"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/cachex"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/errorx"
 )
 
 type (

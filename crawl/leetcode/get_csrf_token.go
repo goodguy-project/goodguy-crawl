@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"net/http"
 
-	"github.com/goodguy-project/goodguy-crawl/util/httpx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/httpx"
 )
 
 func getCsrfToken(client *http.Client, url string) string {

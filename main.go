@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/goodguy-project/goodguy-crawl/service"
+	"github.com/goodguy-project/goodguy-crawl/v2/service"
 )
 
 func main() {

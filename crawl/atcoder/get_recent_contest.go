@@ -8,9 +8,9 @@ import (
 
 	"github.com/antchfx/htmlquery"
 
-	"github.com/goodguy-project/goodguy-crawl/proto"
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
-	"github.com/goodguy-project/goodguy-crawl/util/httpx"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/errorx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/httpx"
 )
 
 func getContestDuration(url string) int32 {

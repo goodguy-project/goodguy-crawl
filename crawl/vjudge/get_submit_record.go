@@ -12,9 +12,9 @@ import (
 	mapset "github.com/deckarep/golang-set/v2"
 	"github.com/tidwall/gjson"
 
-	"github.com/goodguy-project/goodguy-crawl/proto"
-	"github.com/goodguy-project/goodguy-crawl/util/errorx"
-	"github.com/goodguy-project/goodguy-crawl/util/httpx"
+	"github.com/goodguy-project/goodguy-crawl/v2/proto"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/errorx"
+	"github.com/goodguy-project/goodguy-crawl/v2/util/httpx"
 )
 
 var (
