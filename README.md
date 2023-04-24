@@ -37,4 +37,4 @@ A service for real-time crawlers to obtain information.
 
 ### Go SDK Mode
 
-`go get github.com/goodguy-project/goodguy-crawl`
+`go get github.com/goodguy-project/goodguy-crawl/v2`
