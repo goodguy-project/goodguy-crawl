@@ -26,6 +26,7 @@ func New(err error) *Error {
 	} else {
 		e.msg = "unknown error"
 	}
+	fmt.Printf("Error: %s\n", e.msg)
 	debug.PrintStack()
 	return e
 }
