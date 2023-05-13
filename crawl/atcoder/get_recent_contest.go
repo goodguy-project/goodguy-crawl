@@ -36,7 +36,7 @@ func getContestDuration(url string) int32 {
 			ret = ret*10 + int(c-'0')
 		}
 	}
-	return int32(ret)
+	return int32(ret) * 60
 }
 
 func GetRecentContest(_ *proto.GetRecentContestRequest) (*proto.GetRecentContestResponse, error) {
