@@ -1,10 +1,10 @@
 package cachex
 
 import (
+	"math"
 	"os"
 	"reflect"
 	"time"
-	"unsafe"
 
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
@@ -114,15 +114,12 @@ func hashRecursion(x reflect.Value) uint64 {
 		}
 		return splitmix64(defaultBoolHash)
 	case reflect.Float32, reflect.Float64:
-		y := x.Float()
-		return splitmix64(defaultFloatHash + *(*uint64)(unsafe.Pointer(&y)))
+		return splitmix64(defaultFloatHash + math.Float64bits(x.Float()))
 	case reflect.Complex64, reflect.Complex128:
 		y := x.Complex()
-		ptr := (*struct {
-			X uint64
-			Y uint64
-		})(unsafe.Pointer(&y))
-		return splitmix64(splitmix64(defaultComplexHash+ptr.X) + ptr.Y)
+		a := math.Float64bits(real(y))
+		b := math.Float64bits(imag(y))
+		return splitmix64(splitmix64(defaultComplexHash+a) + b)
 	case reflect.String:
 		return hashRecursion(reflect.ValueOf([]byte(x.String())))
 	default:
