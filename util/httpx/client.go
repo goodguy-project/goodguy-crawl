@@ -73,6 +73,12 @@ func SendRequest[Resp any](key string, client *http.Client, req *http.Request) (
 	if err != nil {
 		return
 	}
+	defer func() {
+		e := httpResponse.Body.Close()
+		if err == nil {
+			err = e
+		}
+	}()
 	// handle response
 	extra.Cookies = httpResponse.Cookies()
 	extra.Header = httpResponse.Header
