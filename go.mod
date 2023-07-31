@@ -8,7 +8,7 @@ require (
 	github.com/deckarep/golang-set/v2 v2.3.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/samber/lo v1.38.1
-	github.com/tidwall/gjson v1.14.4
+	github.com/tidwall/gjson v1.15.0
 	golang.org/x/net v0.12.0
 	golang.org/x/sync v0.2.0
 	google.golang.org/grpc v1.56.2
