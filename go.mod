@@ -7,7 +7,7 @@ require (
 	github.com/bytedance/sonic v1.9.2
 	github.com/deckarep/golang-set/v2 v2.3.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/samber/lo v1.38.1
+	github.com/samber/lo v1.39.0
 	github.com/tidwall/gjson v1.15.0
 	golang.org/x/net v0.14.0
 	golang.org/x/sync v0.2.0
